@@ -1,0 +1,103 @@
+[package]
+name = "web3-shipping-platform"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Web Framework
+axum = "0.7"
+tokio = { version = "1.0", features = ["full"] }
+tower = "0.4"
+tower-http = { version = "0.5", features = ["cors", "trace"] }
+hyper = { version = "1.0", features = ["full"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Database
+sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "chrono", "uuid"] }
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1.0", features = ["v4", "serde"] }
+
+# Authentication & Security
+jsonwebtoken = "9.0"
+argon2 = "0.5"
+rand = "0.8"
+base64 = "0.21"
+
+# Web3 & Blockchain
+ethers = "2.0"
+web3 = "0.20"
+ic-agent = "0.12"
+ic-cdk = "0.12"
+
+# HTTP Client
+reqwest = { version = "0.11", features = ["json"] }
+
+# Configuration
+config = "0.14"
+dotenv = "0.15"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Error Handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Async utilities
+futures = "0.3"
+async-trait = "0.1"
+
+# File handling
+tempfile = "3.0"
+bytes = "1.0"
+
+# Validation
+validator = { version = "0.18", features = ["derive"] }
+
+# Rate limiting
+governor = "0.6"
+
+# Background tasks
+sqlx-migrate = "0.1"
+
+# CORS and Compression (combined)
+tower-http = { version = "0.5", features = ["cors", "compression-gzip"] }
+
+# Metrics
+metrics = "0.22"
+metrics-exporter-prometheus = "0.13"
+
+# Cache
+redis = { version = "0.24", features = ["tokio-comp"] }
+
+# Email
+lettre = "0.11"
+
+# SMS
+twilio = "0.3"
+
+# QR Code generation
+qrcode = "0.14"
+
+# Image processing
+image = "0.24"
+
+# Cryptography
+ring = "0.17"
+aes-gcm = "0.10"
+
+# Time
+time = "0.3"
+
+# UUID (removed duplicate)
+
+# Environment
+dotenvy = "0.15"
+
+# Additional dependencies for utilities
+regex = "1.0"
+sha2 = "0.10"
