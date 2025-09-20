@@ -11,6 +11,7 @@ import { Label } from "./ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
 import AdvancedRegistration from "./AdvancedRegistration";
+import AdvancedVerificationForm from "./AdvancedVerificationForm";
 import UserProfileCard from "./UserProfileCard";
 import UserVerificationCard from "./UserVerificationCard";
 import worldIdService from "../services/worldIdService";
@@ -30,6 +31,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
   const [selectedUserType, setSelectedUserType] = useState("");
   const [selectedVerificationLevel, setSelectedVerificationLevel] = useState("");
   const [showAdvancedRegistration, setShowAdvancedRegistration] = useState(false);
+  const [showAdvancedVerification, setShowAdvancedVerification] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
   const [verificationStatus, setVerificationStatus] = useState({
@@ -116,7 +118,8 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
       if (selectedVerificationLevel === 'standard') {
         await handleStandardRegistration();
       } else if (selectedVerificationLevel === 'advanced') {
-        await handleAdvancedRegistration();
+        // إظهار نموذج التحقق المتقدم مع الأيقونات
+        setShowAdvancedVerification(true);
       }
     }
   };
@@ -244,14 +247,19 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
     }
   };
 
-  const handleAdvancedRegistrationComplete = (userData) => {
-    // إتمام عملية التسجيل
-    console.log("Registration completed for user type:", selectedUserType);
+  const handleAdvancedVerificationComplete = (userData) => {
+    console.log("Advanced verification completed for user type:", selectedUserType);
     onAuthSuccess({
       userType: selectedUserType,
-      name: userData?.personalInfo?.firstName + " " + userData?.personalInfo?.lastName || "المستخدم",
-      email: userData?.personalInfo?.email || formData.email
+      verificationLevel: 'advanced',
+      name: userData.name || formData.name,
+      email: userData.email || formData.email,
+      verificationStatus: userData.verificationStatus
     });
+  };
+
+  const handleBackFromAdvancedVerification = () => {
+    setShowAdvancedVerification(false);
   };
 
   const handleBackFromAdvanced = () => {
@@ -269,6 +277,18 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
     }
     return true;
   };
+
+  // إظهار نموذج التحقق المتقدم
+  if (showAdvancedVerification) {
+    return (
+      <AdvancedVerificationForm
+        userType={selectedUserType}
+        formData={formData}
+        onComplete={handleAdvancedVerificationComplete}
+        onBack={handleBackFromAdvancedVerification}
+      />
+    );
+  }
 
   // إظهار صفحة التسجيل المتقدم
   if (showAdvancedRegistration) {
@@ -840,8 +860,8 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
                             <span>🛡️</span>
                             <span>
                               {selectedVerificationLevel === 'advanced' 
-                                ? t("start_advanced_verification")
-                                : t("start_normal_registration")
+                                ? t("advanced_registration")
+                                : t("normal_registration")
                               }
                             </span>
                           </>

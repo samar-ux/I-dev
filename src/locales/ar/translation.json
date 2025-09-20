@@ -180,5 +180,16 @@
   "no_account_create_protected": "ليس لديك حساب؟ إنشاء حساب محمي جديد",
   "have_account_secure_login": "لديك حساب بالفعل؟ دخول آمن",
   "choose_different_type": "اختر نوع آخر",
-  "main_page": "الرئيسية"
+  "main_page": "الرئيسية",
+  "normal_registration": "تسجيل عادي",
+  "advanced_registration": "تسجيل متقدم",
+  "complete_registration": "إتمام التسجيل",
+  "verification_complete": "تم التحقق بنجاح",
+  "verification_pending": "جاري التحقق",
+  "verification_failed": "فشل التحقق",
+  "click_to_verify": "اضغط للتحقق",
+  "verification_success": "تم التحقق بنجاح",
+  "verification_error": "خطأ في التحقق",
+  "verification_progress": "تقدم التحقق",
+  "verification_instructions": "اضغط على الأيقونات لإتمام التحقق. تحتاج إلى إتمام خدمتين على الأقل للمتابعة."
 }

@@ -178,6 +178,17 @@
   "no_account_create_protected": "Don't have an account? Create a new protected account",
   "have_account_secure_login": "Already have an account? Secure login",
   "choose_different_type": "Choose different type",
-  "main_page": "Main Page"
+  "main_page": "Main Page",
+  "normal_registration": "Normal Registration",
+  "advanced_registration": "Advanced Registration",
+  "complete_registration": "Complete Registration",
+  "verification_complete": "Verification Complete",
+  "verification_pending": "Verification Pending",
+  "verification_failed": "Verification Failed",
+  "click_to_verify": "Click to Verify",
+  "verification_success": "Verification Successful",
+  "verification_error": "Verification Error",
+  "verification_progress": "Verification Progress",
+  "verification_instructions": "Click on the icons to complete verification. You need to complete at least two services to proceed."
 }
 

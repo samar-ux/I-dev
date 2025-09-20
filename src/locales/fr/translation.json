@@ -180,5 +180,16 @@
   "no_account_create_protected": "Vous n'avez pas de compte ? Créer un nouveau compte protégé",
   "have_account_secure_login": "Vous avez déjà un compte ? Connexion sécurisée",
   "choose_different_type": "Choisir un type différent",
-  "main_page": "Page principale"
+  "main_page": "Page principale",
+  "normal_registration": "Inscription normale",
+  "advanced_registration": "Inscription avancée",
+  "complete_registration": "Finaliser l'inscription",
+  "verification_complete": "Vérification terminée",
+  "verification_pending": "Vérification en cours",
+  "verification_failed": "Échec de la vérification",
+  "click_to_verify": "Cliquer pour vérifier",
+  "verification_success": "Vérification réussie",
+  "verification_error": "Erreur de vérification",
+  "verification_progress": "Progrès de vérification",
+  "verification_instructions": "Cliquez sur les icônes pour terminer la vérification. Vous devez terminer au moins deux services pour continuer."
 }
