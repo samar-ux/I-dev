@@ -77,7 +77,7 @@ const Settings = () => {
             </div>
             <div>
               <h1 className="text-3xl font-bold text-white">{t('settings_title')}</h1>
-              <p className="text-cyan-200 mt-1">Customize your platform experience</p>
+              <p className="text-cyan-200 mt-1">{t('customize_platform')}</p>
             </div>
           </div>
         </div>
@@ -106,6 +106,9 @@ const Settings = () => {
                     </SelectItem>
                     <SelectItem value="en" className="text-foreground hover:bg-primary/10">
                       🇺🇸 {t('english')}
+                    </SelectItem>
+                    <SelectItem value="fr" className="text-foreground hover:bg-primary/10">
+                      🇫🇷 {t('french')}
                     </SelectItem>
                   </SelectContent>
                 </Select>

@@ -21,6 +21,7 @@ import { Badge } from "./ui/badge";
 
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
+import LanguageSwitcher from "./LanguageSwitcher";
 import idevLogo from "../assets/3.jpg";
 import "../App.css";
 
@@ -180,6 +181,9 @@ const Layout = ({ children, currentView, onViewChange, user, onLogout }) => {
 
             {/* User Info and Status */}
             <div className="flex items-center gap-2">
+              {/* Language Switcher */}
+              <LanguageSwitcher />
+              
               {/* User Info */}
               {user && (
                 <div className="hidden md:flex items-center gap-2 ml-2">

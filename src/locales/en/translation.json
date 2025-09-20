@@ -98,10 +98,22 @@
   "select_language": "Select Language",
   "arabic": "Arabic",
   "english": "English",
+  "french": "French",
   "theme_settings": "Theme Settings",
   "dark_mode": "Dark Mode",
   "notifications": "Notifications",
   "enable_notifications": "Enable Notifications",
-  "save_changes": "Save Changes"
+  "save_changes": "Save Changes",
+  "store_dashboard_label": "Store Dashboard",
+  "store_dashboard_desc": "Manage stores and orders",
+  "driver_dashboard_label": "Driver Dashboard",
+  "driver_dashboard_desc": "Track drivers and deliveries",
+  "track_shipments_label": "Track Shipments",
+  "track_shipments_desc": "Track shipment status",
+  "returns_management_label": "Returns",
+  "returns_management_desc": "Manage returns and exchanges",
+  "customize_platform": "Customize your platform experience",
+  "language": "Language",
+  "switch_language": "Switch Language"
 }
 

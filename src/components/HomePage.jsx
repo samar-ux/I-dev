@@ -34,31 +34,31 @@ const HomePage = ({ onViewChange }) => {
   const quickActions = [
     {
       id: "store",
-      label: "لوحة المتجر",
+      label: t("store_dashboard_label"),
       icon: Store,
       color: "bg-green-500",
-      description: "إدارة المتاجر والطلبات",
+      description: t("store_dashboard_desc"),
     },
     {
       id: "driver",
-      label: "لوحة السائق",
+      label: t("driver_dashboard_label"),
       icon: Truck,
       color: "bg-orange-500",
-      description: "متابعة السائقين والتوصيل",
+      description: t("driver_dashboard_desc"),
     },
     {
       id: "tracking",
-      label: "تتبع الشحنات",
+      label: t("track_shipments_label"),
       icon: Package,
       color: "bg-purple-500",
-      description: "تتبع حالة الشحنات",
+      description: t("track_shipments_desc"),
     },
     {
       id: "returns",
-      label: "المرتجعات",
+      label: t("returns_management_label"),
       icon: RefreshCcw,
       color: "bg-red-500",
-      description: "إدارة المرتجعات والاستبدال",
+      description: t("returns_management_desc"),
     },
   ];
 

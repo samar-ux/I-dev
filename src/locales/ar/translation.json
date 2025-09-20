@@ -100,9 +100,21 @@
   "select_language": "اختر اللغة",
   "arabic": "العربية",
   "english": "الإنجليزية",
+  "french": "الفرنسية",
   "theme_settings": "إعدادات المظهر",
   "dark_mode": "الوضع الداكن",
   "notifications": "الإشعارات",
   "enable_notifications": "تفعيل الإشعارات",
-  "save_changes": "حفظ التغييرات"
+  "save_changes": "حفظ التغييرات",
+  "store_dashboard_label": "لوحة المتجر",
+  "store_dashboard_desc": "إدارة المتاجر والطلبات",
+  "driver_dashboard_label": "لوحة السائق",
+  "driver_dashboard_desc": "متابعة السائقين والتوصيل",
+  "track_shipments_label": "تتبع الشحنات",
+  "track_shipments_desc": "تتبع حالة الشحنات",
+  "returns_management_label": "المرتجعات",
+  "returns_management_desc": "إدارة المرتجعات والاستبدال",
+  "customize_platform": "تخصيص تجربة المنصة",
+  "language": "اللغة",
+  "switch_language": "تبديل اللغة"
 }
