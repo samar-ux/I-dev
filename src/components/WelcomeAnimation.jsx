@@ -9,12 +9,12 @@ const WelcomeAnimation = ({ onComplete }) => {
   const [showLogo, setShowLogo] = useState(false);
   const [currentText, setCurrentText] = useState(0);
   const [showLanguageBalls, setShowLanguageBalls] = useState(false);
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   const texts = [
-    "مرحبا بك I Dev",
-    "منصة شحن ذكية",
-    "سهولة الشحن وتسريع حركة التجارة الالكترونية",
+    t("welcome_title_1"),
+    t("welcome_title_2"),
+    t("welcome_title_3"),
   ];
 
   const languageOptions = [
@@ -327,7 +327,7 @@ const WelcomeAnimation = ({ onComplete }) => {
             transition={{ delay: 0.7, duration: 0.8 }}
             className="text-base bg-gradient-to-r from-cyan-300 to-white bg-clip-text text-transparent mb-3 max-w-2xl mx-auto leading-relaxed"
           >
-            منصة لوجستية متطورة مدعومة بتقنية البلوك تشين
+            {t("welcome_subtitle")}
           </motion.p>
 
           {/* Technology Features */}
@@ -338,16 +338,16 @@ const WelcomeAnimation = ({ onComplete }) => {
             className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-white/80 mb-4 max-w-xl mx-auto"
           >
             <div className="flex items-center justify-center gap-1 bg-white/10 backdrop-blur-sm rounded-lg py-1 px-2">
-              🔗 البلوك تشين
+              🔗 {t("blockchain_tech")}
             </div>
             <div className="flex items-center justify-center gap-1 bg-white/10 backdrop-blur-sm rounded-lg py-1 px-2">
-              🌐 تقنية Web3
+              🌐 {t("web3_tech")}
             </div>
             <div className="flex items-center justify-center gap-1 bg-white/10 backdrop-blur-sm rounded-lg py-1 px-2">
-              ⚡ بروتوكول ICP
+              ⚡ {t("icp_protocol")}
             </div>
             <div className="flex items-center justify-center gap-1 bg-white/10 backdrop-blur-sm rounded-lg py-1 px-2">
-              🚚 لوجستيات ذكية
+              🚚 {t("smart_logistics")}
             </div>
           </motion.div>
 
@@ -391,7 +391,7 @@ const WelcomeAnimation = ({ onComplete }) => {
             {/* Shiny effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
             
-            <span className="relative z-10">ابدأ رحلتك معنا</span>
+            <span className="relative z-10">{t("start_journey")}</span>
           </motion.button>
         </div>
       </div>

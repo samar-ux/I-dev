@@ -16,8 +16,11 @@ import UserVerificationCard from "./UserVerificationCard";
 import worldIdService from "../services/worldIdService";
 import internetIdentityService from "../services/internetIdentityService";
 import kycAmlService from "../services/kycAmlService";
+import { useTranslation } from "react-i18next";
 
 const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
+  const { t } = useTranslation();
+  
   // تحديد نوع الصفحة بناءً على اختيار المستخدم في الصفحة الافتتاحية
   const [isLogin, setIsLogin] = useState(() => {
     const authAction = localStorage.getItem("authAction");
@@ -48,8 +51,8 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
   const userTypes = [
     {
       id: "store_owner",
-      title: "تاجر",
-      description: "للتجارة المتقدمة",
+      title: t("merchant"),
+      description: t("merchant_desc"),
       icon: Store,
       color: "bg-green-500 hover:bg-green-600",
       bgColor: "bg-green-50 dark:bg-green-950",
@@ -57,8 +60,8 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
     },
     {
       id: "customer",
-      title: "عميل",
-      description: "للأفراد والمسؤولين",
+      title: t("customer"),
+      description: t("customer_desc"),
       icon: UserCircle,
       color: "bg-blue-500 hover:bg-blue-600",
       bgColor: "bg-blue-50 dark:bg-blue-950",
@@ -66,8 +69,8 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
     },
     {
       id: "company",
-      title: "مدير",
-      description: "للمدراء والإدارة",
+      title: t("manager"),
+      description: t("manager_desc"),
       icon: Building,
       color: "bg-purple-500 hover:bg-purple-600",
       bgColor: "bg-purple-50 dark:bg-purple-950",
@@ -75,8 +78,8 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
     },
     {
       id: "driver",
-      title: "سائق",
-      description: "لسائقي التوصيل",
+      title: t("driver"),
+      description: t("driver_desc"),
       icon: Truck,
       color: "bg-orange-500 hover:bg-orange-600",
       bgColor: "bg-orange-50 dark:bg-orange-950",
@@ -319,7 +322,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
             className="text-center mb-12"
           >
             <h1 className="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-white bg-clip-text text-transparent mb-4">
-              اختر حسابك
+              {t("choose_account")}
             </h1>
           </motion.div>
 
@@ -369,7 +372,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
                             }}
                             size="sm"
                             className={`${type.color} text-white hover:shadow-lg transition-all duration-200 p-2 rounded-full`}
-                            title="حساب جديد"
+                            title={t("new_account")}
                           >
                             <UserPlus className="w-4 h-4" />
                           </Button>
@@ -381,7 +384,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
                             variant="outline"
                             size="sm"
                             className={`border-2 ${type.color.split(' ')[0]} text-${type.color.split(' ')[0]} hover:${type.color} hover:text-white transition-all duration-200 p-2 rounded-full`}
-                            title="تسجيل دخول"
+                            title={t("login")}
                           >
                             <LogIn className="w-4 h-4" />
                           </Button>
@@ -413,7 +416,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                 <span className="relative z-10">
-                  الصفحة الرئيسية
+                  {t("back_to_home")}
                 </span>
               </Button>
             </motion.div>
@@ -508,7 +511,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
                   </div>
                   
                   <CardTitle className="text-3xl font-bold text-white mb-2">
-                    {isLogin ? "تسجيل الدخول الآمن" : "إنشاء حساب محمي"}
+                    {isLogin ? t("secure_login") : t("create_protected_account")}
                   </CardTitle>
                   <CardDescription className="text-lg text-white/80 mb-4">
                     {selectedType?.title} - {selectedType?.description}
@@ -518,28 +521,28 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
                   <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 text-sm">
                     <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
                       <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                      نظام هوية وتحقق متقدم
+                      {t("advanced_identity_system")}
                     </h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-white/70">
                       <div className="flex items-center gap-2">
                         <span className="text-green-400">✓</span>
-                        <span>مصادقة متعددة العوامل</span>
+                        <span>{t("multi_factor_auth")}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="text-blue-400">✓</span>
-                        <span>تكامل World ID</span>
+                        <span>{t("world_id_integration")}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="text-purple-400">✓</span>
-                        <span>تحقق بيومتري آمن</span>
+                        <span>{t("secure_biometric_verification")}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="text-orange-400">✓</span>
-                        <span>عمليات KYC/AML</span>
+                        <span>{t("kyc_aml_operations")}</span>
                       </div>
                     </div>
                     <div className="mt-3 text-xs text-white/60 text-center">
-                      🔒 حماية شاملة بتقنيات الذكاء الاصطناعي وBiometric Authentication
+                      🔒 {t("comprehensive_protection")}
                     </div>
                   </div>
                 </motion.div>
@@ -604,7 +607,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* البريد الإلكتروني */}
                     <div className="space-y-2">
-                      <Label htmlFor="email" className="text-right text-white font-medium">البريد الإلكتروني</Label>
+                      <Label htmlFor="email" className="text-right text-white font-medium">{t("email")}</Label>
                       <div className="relative">
                         <Mail className={`absolute right-3 top-3 h-4 w-4 ${colorClass.replace('bg-', 'text-')}`} />
                         <Input
@@ -622,7 +625,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
                     {/* الاسم (للتسجيل فقط) */}
                     {!isLogin && (
                       <div className="space-y-2">
-                        <Label htmlFor="name" className="text-right text-white font-medium">الاسم الكامل</Label>
+                        <Label htmlFor="name" className="text-right text-white font-medium">{t("full_name")}</Label>
                         <div className="relative">
                           <User className={`absolute right-3 top-3 h-4 w-4 ${colorClass.replace('bg-', 'text-')}`} />
                           <Input
@@ -631,7 +634,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
                             value={formData.name}
                             onChange={(e) => handleInputChange("name", e.target.value)}
                             className={`pr-10 text-right bg-white/10 backdrop-blur-sm border-2 ${borderColorClass} text-white placeholder:text-white/60 focus:border-white/50`}
-                            placeholder="أدخل اسمك الكامل"
+                            placeholder={t("enter_full_name")}
                             required
                           />
                         </div>
@@ -640,7 +643,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
 
                     {/* كلمة المرور */}
                     <div className="space-y-2">
-                      <Label htmlFor="password" className="text-right text-white font-medium">كلمة المرور</Label>
+                      <Label htmlFor="password" className="text-right text-white font-medium">{t("password")}</Label>
                       <div className="relative">
                         <Lock className={`absolute right-3 top-3 h-4 w-4 ${colorClass.replace('bg-', 'text-')}`} />
                         <Input
@@ -665,7 +668,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
                     {/* تأكيد كلمة المرور (للتسجيل فقط) */}
                     {!isLogin && (
                       <div className="space-y-2">
-                        <Label htmlFor="confirmPassword" className="text-right text-white font-medium">تأكيد كلمة المرور</Label>
+                        <Label htmlFor="confirmPassword" className="text-right text-white font-medium">{t("confirm_password")}</Label>
                         <div className="relative">
                           <Lock className={`absolute right-3 top-3 h-4 w-4 ${colorClass.replace('bg-', 'text-')}`} />
                           <Input
@@ -679,7 +682,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
                           />
                         </div>
                         {formData.confirmPassword && formData.password !== formData.confirmPassword && (
-                          <p className="text-red-300 text-sm text-right">كلمات المرور غير متطابقة</p>
+                          <p className="text-red-300 text-sm text-right">{t("passwords_not_match")}</p>
                         )}
                       </div>
                     )}
@@ -687,7 +690,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
                     {/* رقم الهاتف (للتسجيل فقط) */}
                     {!isLogin && (
                       <div className="space-y-2">
-                        <Label htmlFor="phone" className="text-right text-white font-medium">رقم الهاتف</Label>
+                        <Label htmlFor="phone" className="text-right text-white font-medium">{t("phone_number")}</Label>
                         <div className="relative">
                           <Phone className={`absolute right-3 top-3 h-4 w-4 ${colorClass.replace('bg-', 'text-')}`} />
                           <Input
@@ -825,20 +828,20 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
                         {isVerifying ? (
                           <>
                             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                            <span>جاري التحقق...</span>
+                            <span>{t("verifying")}</span>
                           </>
                         ) : isLogin ? (
                           <>
                             <span>🔐</span>
-                            <span>دخول آمن متعدد العوامل</span>
+                            <span>{t("secure_multi_factor_login")}</span>
                           </>
                         ) : (
                           <>
                             <span>🛡️</span>
                             <span>
                               {selectedVerificationLevel === 'advanced' 
-                                ? 'بدء التحقق المتقدم' 
-                                : 'بدء التسجيل العادي'
+                                ? t("start_advanced_verification")
+                                : t("start_normal_registration")
                               }
                             </span>
                           </>
@@ -865,8 +868,8 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
                         className={`${colorClass.replace('bg-', 'text-')} hover:text-white/80 transition-colors duration-200 font-medium`}
                       >
                         {isLogin 
-                          ? "ليس لديك حساب؟ إنشاء حساب محمي جديد" 
-                          : "لديك حساب بالفعل؟ دخول آمن"
+                          ? t("no_account_create_protected")
+                          : t("have_account_secure_login")
                         }
                       </button>
                       
