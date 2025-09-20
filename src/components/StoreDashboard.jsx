@@ -14,13 +14,33 @@ import {
   AlertCircle,
   Eye,
   Edit,
-  Trash2
+  Trash2,
+  Loader2
 } from 'lucide-react';
+import ConfirmationCodeDisplay from './ConfirmationCodeDisplay';
+import confirmationService from '../services/confirmationService';
 import '../App.css';
 
 const StoreDashboard = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [showCreateForm, setShowCreateForm] = useState(false);
+  const [isCreatingShipment, setIsCreatingShipment] = useState(false);
+  const [showConfirmationCode, setShowConfirmationCode] = useState(false);
+  const [confirmationData, setConfirmationData] = useState(null);
+  const [formData, setFormData] = useState({
+    senderName: '',
+    senderPhone: '',
+    senderAddress: '',
+    recipientName: '',
+    recipientPhone: '',
+    recipientEmail: '',
+    recipientAddress: '',
+    packageType: '',
+    weight: '',
+    value: '',
+    paymentMethod: '',
+    instructions: ''
+  });
 
   const stats = [
     {
@@ -83,6 +103,116 @@ const StoreDashboard = () => {
     }
   ];
 
+  // دالة إنشاء الشحنة وإرسال كود التأكيد
+  const handleCreateShipment = async () => {
+    try {
+      setIsCreatingShipment(true);
+
+      // إنشاء معرف فريد للشحنة
+      const shipmentId = `SH${Date.now().toString().slice(-6)}`;
+      
+      // بيانات الشحنة
+      const shipmentDetails = {
+        id: shipmentId,
+        recipient: formData.recipientName,
+        address: formData.recipientAddress,
+        value: `${formData.value} ريال`,
+        packageType: formData.packageType,
+        weight: formData.weight,
+        paymentMethod: formData.paymentMethod,
+        instructions: formData.instructions,
+        createdAt: new Date().toLocaleDateString('ar-SA')
+      };
+
+      // معلومات الاتصال بالعميل
+      const contactInfo = {
+        phone: formData.recipientPhone,
+        email: formData.recipientEmail
+      };
+
+      // إرسال كود التأكيد
+      const confirmationResult = await confirmationService.sendConfirmationCode(
+        shipmentDetails, 
+        contactInfo
+      );
+
+      if (confirmationResult.success) {
+        // حفظ كود التأكيد
+        await confirmationService.saveConfirmationCode(
+          shipmentId, 
+          confirmationResult.confirmationCode, 
+          contactInfo
+        );
+
+        // إعداد بيانات العرض
+        setConfirmationData({
+          shipmentDetails,
+          confirmationCode: confirmationResult.confirmationCode,
+          deliveryResults: confirmationResult.results,
+          contactInfo
+        });
+
+        // إظهار نافذة كود التأكيد
+        setShowConfirmationCode(true);
+        
+        // إخفاء نموذج الإنشاء
+        setShowCreateForm(false);
+        
+        // إعادة تعيين النموذج
+        setFormData({
+          senderName: '',
+          senderPhone: '',
+          senderAddress: '',
+          recipientName: '',
+          recipientPhone: '',
+          recipientEmail: '',
+          recipientAddress: '',
+          packageType: '',
+          weight: '',
+          value: '',
+          paymentMethod: '',
+          instructions: ''
+        });
+
+        console.log('✅ تم إنشاء الشحنة وإرسال كود التأكيد بنجاح');
+      } else {
+        console.error('❌ فشل في إرسال كود التأكيد:', confirmationResult.error);
+        alert('حدث خطأ في إرسال كود التأكيد. يرجى المحاولة مرة أخرى.');
+      }
+    } catch (error) {
+      console.error('❌ خطأ في إنشاء الشحنة:', error);
+      alert('حدث خطأ في إنشاء الشحنة. يرجى المحاولة مرة أخرى.');
+    } finally {
+      setIsCreatingShipment(false);
+    }
+  };
+
+  // دالة إعادة إرسال كود التأكيد
+  const handleResendConfirmation = async () => {
+    if (!confirmationData) return;
+
+    try {
+      const resendResult = await confirmationService.sendConfirmationCode(
+        confirmationData.shipmentDetails,
+        confirmationData.contactInfo
+      );
+
+      if (resendResult.success) {
+        setConfirmationData(prev => ({
+          ...prev,
+          confirmationCode: resendResult.confirmationCode,
+          deliveryResults: resendResult.results
+        }));
+        alert('تم إعادة إرسال كود التأكيد بنجاح!');
+      } else {
+        alert('فشل في إعادة إرسال كود التأكيد. يرجى المحاولة مرة أخرى.');
+      }
+    } catch (error) {
+      console.error('خطأ في إعادة إرسال كود التأكيد:', error);
+      alert('حدث خطأ في إعادة إرسال كود التأكيد.');
+    }
+  };
+
   const CreateShipmentForm = () => (
     <Card className="glass-card">
       <CardHeader>
@@ -118,15 +248,40 @@ const StoreDashboard = () => {
             <div className="space-y-3">
               <div>
                 <Label htmlFor="recipientName">اسم المستلم</Label>
-                <Input id="recipientName" placeholder="أدخل اسم المستلم" />
+                <Input 
+                  id="recipientName" 
+                  placeholder="أدخل اسم المستلم"
+                  value={formData.recipientName}
+                  onChange={(e) => setFormData(prev => ({ ...prev, recipientName: e.target.value }))}
+                />
               </div>
               <div>
                 <Label htmlFor="recipientPhone">رقم الهاتف</Label>
-                <Input id="recipientPhone" placeholder="05xxxxxxxx" />
+                <Input 
+                  id="recipientPhone" 
+                  placeholder="05xxxxxxxx"
+                  value={formData.recipientPhone}
+                  onChange={(e) => setFormData(prev => ({ ...prev, recipientPhone: e.target.value }))}
+                />
+              </div>
+              <div>
+                <Label htmlFor="recipientEmail">البريد الإلكتروني</Label>
+                <Input 
+                  id="recipientEmail" 
+                  type="email"
+                  placeholder="example@email.com"
+                  value={formData.recipientEmail}
+                  onChange={(e) => setFormData(prev => ({ ...prev, recipientEmail: e.target.value }))}
+                />
               </div>
               <div>
                 <Label htmlFor="recipientAddress">عنوان المستلم</Label>
-                <Textarea id="recipientAddress" placeholder="أدخل العنوان التفصيلي" />
+                <Textarea 
+                  id="recipientAddress" 
+                  placeholder="أدخل العنوان التفصيلي"
+                  value={formData.recipientAddress}
+                  onChange={(e) => setFormData(prev => ({ ...prev, recipientAddress: e.target.value }))}
+                />
               </div>
             </div>
           </div>
@@ -138,7 +293,7 @@ const StoreDashboard = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <Label htmlFor="packageType">نوع الطرد</Label>
-              <Select>
+              <Select value={formData.packageType} onValueChange={(value) => setFormData(prev => ({ ...prev, packageType: value }))}>
                 <SelectTrigger>
                   <SelectValue placeholder="اختر نوع الطرد" />
                 </SelectTrigger>
@@ -153,11 +308,23 @@ const StoreDashboard = () => {
             </div>
             <div>
               <Label htmlFor="weight">الوزن (كيلو)</Label>
-              <Input id="weight" type="number" placeholder="2.5" />
+              <Input 
+                id="weight" 
+                type="number" 
+                placeholder="2.5"
+                value={formData.weight}
+                onChange={(e) => setFormData(prev => ({ ...prev, weight: e.target.value }))}
+              />
             </div>
             <div>
               <Label htmlFor="value">قيمة الطرد (ريال)</Label>
-              <Input id="value" type="number" placeholder="150" />
+              <Input 
+                id="value" 
+                type="number" 
+                placeholder="150"
+                value={formData.value}
+                onChange={(e) => setFormData(prev => ({ ...prev, value: e.target.value }))}
+              />
             </div>
           </div>
         </div>
@@ -220,14 +387,28 @@ const StoreDashboard = () => {
 
         {/* Action Buttons */}
         <div className="flex gap-4 pt-4">
-          <Button className="btn-primary flex-1">
-            <Package className="h-4 w-4 ml-2" />
-            إنشاء الشحنة
+          <Button 
+            onClick={handleCreateShipment}
+            disabled={isCreatingShipment || !formData.recipientName || !formData.recipientPhone}
+            className="btn-primary flex-1"
+          >
+            {isCreatingShipment ? (
+              <>
+                <Loader2 className="h-4 w-4 ml-2 animate-spin" />
+                جاري الإنشاء...
+              </>
+            ) : (
+              <>
+                <Package className="h-4 w-4 ml-2" />
+                إنشاء الشحنة وإرسال كود التأكيد
+              </>
+            )}
           </Button>
           <Button 
             variant="outline" 
             onClick={() => setShowCreateForm(false)}
             className="border-primary/20 hover:bg-primary/10"
+            disabled={isCreatingShipment}
           >
             إلغاء
           </Button>
@@ -329,6 +510,17 @@ const StoreDashboard = () => {
         </CardContent>
       </Card>
       </div>
+
+      {/* Confirmation Code Display Modal */}
+      {showConfirmationCode && confirmationData && (
+        <ConfirmationCodeDisplay
+          shipmentDetails={confirmationData.shipmentDetails}
+          confirmationCode={confirmationData.confirmationCode}
+          deliveryResults={confirmationData.deliveryResults}
+          onClose={() => setShowConfirmationCode(false)}
+          onResend={handleResendConfirmation}
+        />
+      )}
     </div>
   );
 };

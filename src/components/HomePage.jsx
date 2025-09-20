@@ -66,28 +66,28 @@ const HomePage = ({ onViewChange }) => {
     {
       id: "SH001",
       status: "delivered",
-      recipient: "أحمد محمد",
+      customer: "أحمد محمد",
       amount: 250,
       time: "10:30 ص",
     },
     {
       id: "SH002",
       status: "in-transit",
-      recipient: "فاطمة علي",
+      customer: "فاطمة علي",
       amount: 180,
       time: "11:15 ص",
     },
     {
       id: "SH003",
       status: "pending",
-      recipient: "محمد سالم",
+      customer: "محمد سالم",
       amount: 320,
       time: "12:00 م",
     },
     {
       id: "SH004",
       status: "delivered",
-      recipient: "نور الدين",
+      customer: "نور الدين",
       amount: 150,
       time: "12:45 م",
     },
@@ -370,7 +370,7 @@ const HomePage = ({ onViewChange }) => {
                   />
                   <div>
                     <p className="font-medium text-sm md:text-base arabic-text">
-                      {shipment.recipient}
+                      {shipment.customer}
                     </p>
                     <p className="text-xs md:text-sm text-muted-foreground">
                       #{shipment.id}
