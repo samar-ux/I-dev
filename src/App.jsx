@@ -45,6 +45,56 @@ function App() {
     }
   }, []);
 
+  // معالج لإعادة التوجيه عند refresh أو إعادة تحميل الصفحة
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      // عند إعادة تحميل الصفحة أو إغلاق المتصفح، إعادة تعيين حالة الصفحة الافتتاحية
+      localStorage.removeItem("hasSeenWelcome");
+      
+      // إضافة رسالة تأكيد عند محاولة إغلاق المتصفح
+      const message = i18n.t('confirm_exit');
+      event.returnValue = message;
+      return message;
+    };
+
+    const handlePageShow = (event) => {
+      // عند العودة للصفحة من cache أو إعادة تحميل
+      if (event.persisted) {
+        localStorage.removeItem("hasSeenWelcome");
+        setShowWelcome(true);
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      // عند العودة للصفحة بعد إخفائها أو إغلاق التبويب
+      if (document.visibilityState === 'visible') {
+        const hasSeenWelcome = localStorage.getItem("hasSeenWelcome");
+        const savedUser = localStorage.getItem("currentUser");
+        
+        if (!hasSeenWelcome) {
+          setShowWelcome(true);
+          setIsAuthenticated(false);
+          setUser(null);
+        } else if (!savedUser) {
+          // إذا لم يكن هناك مستخدم محفوظ، إعادة التوجيه للصفحة الافتتاحية
+          setShowWelcome(true);
+          setIsAuthenticated(false);
+          setUser(null);
+        }
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('pageshow', handlePageShow);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('pageshow', handlePageShow);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
+
   useEffect(() => {
     // Load saved language from localStorage
     const savedLanguage = localStorage.getItem("language");
@@ -99,7 +149,9 @@ function App() {
     setUser(null);
     setIsAuthenticated(false);
     localStorage.removeItem("currentUser");
+    localStorage.removeItem("hasSeenWelcome"); // إزالة علامة مشاهدة الصفحة الافتتاحية
     setCurrentView("home");
+    setShowWelcome(true); // إظهار الصفحة الافتتاحية
   };
 
   const handleViewChange = (viewId) => {

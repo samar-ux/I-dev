@@ -191,5 +191,7 @@
   "verification_success": "تم التحقق بنجاح",
   "verification_error": "خطأ في التحقق",
   "verification_progress": "تقدم التحقق",
-  "verification_instructions": "اضغط على الأيقونات لإتمام التحقق. تحتاج إلى إتمام خدمتين على الأقل للمتابعة."
+  "verification_instructions": "اضغط على الأيقونات لإتمام التحقق. تحتاج إلى إتمام خدمتين على الأقل للمتابعة.",
+  "confirm_exit": "هل أنت متأكد من أنك تريد المغادرة؟",
+  "session_expired": "انتهت جلستك، يرجى تسجيل الدخول مرة أخرى"
 }

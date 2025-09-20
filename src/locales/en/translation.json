@@ -189,6 +189,8 @@
   "verification_success": "Verification Successful",
   "verification_error": "Verification Error",
   "verification_progress": "Verification Progress",
-  "verification_instructions": "Click on the icons to complete verification. You need to complete at least two services to proceed."
+  "verification_instructions": "Click on the icons to complete verification. You need to complete at least two services to proceed.",
+  "confirm_exit": "Are you sure you want to leave?",
+  "session_expired": "Your session has expired, please log in again"
 }
 

@@ -191,5 +191,7 @@
   "verification_success": "Vérification réussie",
   "verification_error": "Erreur de vérification",
   "verification_progress": "Progrès de vérification",
-  "verification_instructions": "Cliquez sur les icônes pour terminer la vérification. Vous devez terminer au moins deux services pour continuer."
+  "verification_instructions": "Cliquez sur les icônes pour terminer la vérification. Vous devez terminer au moins deux services pour continuer.",
+  "confirm_exit": "Êtes-vous sûr de vouloir partir ?",
+  "session_expired": "Votre session a expiré, veuillez vous reconnecter"
 }
