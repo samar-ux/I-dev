@@ -2,7 +2,13 @@
 class WorldIdService {
   constructor() {
     this.isInitialized = false;
-    this.worldIdAppId = process.env.REACT_APP_WORLD_ID_APP_ID || 'app_staging_1234567890abcdef';
+    
+    // استخدام متغير بيئة React أو قيمة افتراضية
+    this.worldIdAppId = 
+      (typeof process !== 'undefined' && process.env && process.env.REACT_APP_WORLD_ID_APP_ID) ||
+      (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_WORLD_ID_APP_ID) ||
+      window.REACT_APP_WORLD_ID_APP_ID ||
+      'app_staging_1234567890abcdef'; // القيمة الافتراضية
   }
 
   async init() {
@@ -85,4 +91,6 @@ class WorldIdService {
   }
 }
 
-export default new WorldIdService();
+// إنشاء نسخة واحدة من الخدمة
+const worldIdService = new WorldIdService();
+export default worldIdService;
