@@ -381,20 +381,22 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
                       {/* النص */}
                       <div className="relative z-10">
                         <h3 className="text-lg font-bold text-gray-800 mb-2">{type.title}</h3>
-                        <p className="text-gray-600 text-xs mb-3">{type.description}</p>
+                        <p className="text-gray-600 text-xs mb-2">{type.description}</p>
+                        <div className="text-xs text-blue-600 mb-3 font-medium">
+                          🌐 التسجيل عبر Internet Identity
+                        </div>
                         
                         {/* أيقونات حساب جديد وتسجيل دخول */}
                         <div className="flex gap-3 justify-center">
                           <Button 
                             onClick={() => {
-                              setSelectedUserType(type.id);
-                              setIsLogin(false);
+                              window.open('https://identity.ic0.app/', '_blank', 'width=500,height=600,left=100,top=100');
                             }}
                             size="sm"
                             className={`${type.color} text-white hover:shadow-lg transition-all duration-200 p-2 rounded-full`}
-                            title={t("new_account")}
+                            title="التسجيل عبر Internet Identity"
                           >
-                            <UserPlus className="w-4 h-4" />
+                            <Globe className="w-4 h-4" />
                           </Button>
                           <Button 
                             onClick={() => {
