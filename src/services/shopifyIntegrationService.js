@@ -2,12 +2,12 @@
 class ShopifyIntegrationService {
   constructor() {
     this.isInitialized = false;
-    this.apiKey = process.env.REACT_APP_SHOPIFY_API_KEY || 'demo_key';
-    this.apiSecret = process.env.REACT_APP_SHOPIFY_API_SECRET || 'demo_secret';
-    this.baseUrl = process.env.REACT_APP_SHOPIFY_BASE_URL || 'https://api.shopify.com';
+    this.apiKey = import.meta.env.VITE_SHOPIFY_API_KEY || 'demo_key';
+    this.apiSecret = import.meta.env.VITE_SHOPIFY_API_SECRET || 'demo_secret';
+    this.baseUrl = import.meta.env.VITE_SHOPIFY_BASE_URL || 'https://api.shopify.com';
     this.accessToken = null;
     this.shopDomain = null;
-    this.webhookSecret = process.env.REACT_APP_SHOPIFY_WEBHOOK_SECRET || 'demo_webhook_secret';
+    this.webhookSecret = import.meta.env.VITE_SHOPIFY_WEBHOOK_SECRET || 'demo_webhook_secret';
   }
 
   async init() {

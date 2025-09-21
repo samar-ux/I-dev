@@ -2,8 +2,8 @@
 class WooCommerceIntegrationService {
   constructor() {
     this.isInitialized = false;
-    this.consumerKey = process.env.REACT_APP_WOOCOMMERCE_CONSUMER_KEY || 'demo_key';
-    this.consumerSecret = process.env.REACT_APP_WOOCOMMERCE_CONSUMER_SECRET || 'demo_secret';
+    this.consumerKey = import.meta.env.VITE_WOOCOMMERCE_CONSUMER_KEY || 'demo_key';
+    this.consumerSecret = import.meta.env.VITE_WOOCOMMERCE_CONSUMER_SECRET || 'demo_secret';
     this.baseUrl = null;
     this.siteUrl = null;
     this.isAuthenticated = false;
@@ -340,19 +340,19 @@ class WooCommerceIntegrationService {
           name: 'Order Created',
           topic: 'order.created',
           delivery_url: `${window.location.origin}/api/webhooks/woocommerce/order-created`,
-          secret: process.env.REACT_APP_WOOCOMMERCE_WEBHOOK_SECRET || 'demo_secret'
+          secret: import.meta.env.VITE_WOOCOMMERCE_WEBHOOK_SECRET || 'demo_secret'
         },
         {
           name: 'Order Updated',
           topic: 'order.updated',
           delivery_url: `${window.location.origin}/api/webhooks/woocommerce/order-updated`,
-          secret: process.env.REACT_APP_WOOCOMMERCE_WEBHOOK_SECRET || 'demo_secret'
+          secret: import.meta.env.VITE_WOOCOMMERCE_WEBHOOK_SECRET || 'demo_secret'
         },
         {
           name: 'Order Paid',
           topic: 'order.paid',
           delivery_url: `${window.location.origin}/api/webhooks/woocommerce/order-paid`,
-          secret: process.env.REACT_APP_WOOCOMMERCE_WEBHOOK_SECRET || 'demo_secret'
+          secret: import.meta.env.VITE_WOOCOMMERCE_WEBHOOK_SECRET || 'demo_secret'
         }
       ];
 

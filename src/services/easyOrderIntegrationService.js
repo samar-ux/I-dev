@@ -2,9 +2,9 @@
 class EasyOrderIntegrationService {
   constructor() {
     this.isInitialized = false;
-    this.apiKey = process.env.REACT_APP_EASYORDER_API_KEY || 'demo_key';
-    this.apiSecret = process.env.REACT_APP_EASYORDER_API_SECRET || 'demo_secret';
-    this.baseUrl = process.env.REACT_APP_EASYORDER_BASE_URL || 'https://api.easyorder.sa';
+    this.apiKey = import.meta.env.VITE_EASYORDER_API_KEY || 'demo_key';
+    this.apiSecret = import.meta.env.VITE_EASYORDER_API_SECRET || 'demo_secret';
+    this.baseUrl = import.meta.env.VITE_EASYORDER_BASE_URL || 'https://api.easyorder.sa';
     this.accessToken = null;
     this.merchantId = null;
     this.isAuthenticated = false;

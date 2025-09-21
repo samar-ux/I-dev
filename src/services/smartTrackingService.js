@@ -664,7 +664,7 @@ class NotificationService {
 class NFTShipmentService {
   constructor() {
     this.isInitialized = false;
-    this.contractAddress = process.env.REACT_APP_NFT_CONTRACT_ADDRESS || '0x...';
+    this.contractAddress = import.meta.env.VITE_NFT_CONTRACT_ADDRESS || '0x...';
     this.contractABI = [
       {
         "inputs": [

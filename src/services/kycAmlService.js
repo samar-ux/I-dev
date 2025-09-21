@@ -5,15 +5,13 @@ class KycAmlService {
     
     // الحصول على API key من متغيرات البيئة أو استخدام قيمة افتراضية
     this.apiKey = 
-      (typeof process !== 'undefined' && process.env && process.env.REACT_APP_KYC_API_KEY) ||
       (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_KYC_API_KEY) ||
-      window.REACT_APP_KYC_API_KEY ||
+      window.VITE_KYC_API_KEY ||
       'demo_key';
     
     this.baseUrl = 
-      (typeof process !== 'undefined' && process.env && process.env.REACT_APP_KYC_BASE_URL) ||
       (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_KYC_BASE_URL) ||
-      window.REACT_APP_KYC_BASE_URL ||
+      window.VITE_KYC_BASE_URL ||
       'https://api.kyc-provider.com';
   }
 

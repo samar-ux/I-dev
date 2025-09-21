@@ -2,8 +2,8 @@
 class WixIntegrationService {
   constructor() {
     this.isInitialized = false;
-    this.appId = process.env.REACT_APP_WIX_APP_ID || 'demo_app_id';
-    this.appSecret = process.env.REACT_APP_WIX_APP_SECRET || 'demo_app_secret';
+    this.appId = import.meta.env.VITE_WIX_APP_ID || 'demo_app_id';
+    this.appSecret = import.meta.env.VITE_WIX_APP_SECRET || 'demo_app_secret';
     this.baseUrl = 'https://www.wixapis.com';
     this.accessToken = null;
     this.instanceId = null;
@@ -384,17 +384,17 @@ class WixIntegrationService {
         {
           topic: 'orders/created',
           callbackUrl: `${window.location.origin}/api/webhooks/wix/orders-created`,
-          secret: process.env.REACT_APP_WIX_WEBHOOK_SECRET || 'demo_secret'
+          secret: import.meta.env.VITE_WIX_WEBHOOK_SECRET || 'demo_secret'
         },
         {
           topic: 'orders/updated',
           callbackUrl: `${window.location.origin}/api/webhooks/wix/orders-updated`,
-          secret: process.env.REACT_APP_WIX_WEBHOOK_SECRET || 'demo_secret'
+          secret: import.meta.env.VITE_WIX_WEBHOOK_SECRET || 'demo_secret'
         },
         {
           topic: 'orders/paid',
           callbackUrl: `${window.location.origin}/api/webhooks/wix/orders-paid`,
-          secret: process.env.REACT_APP_WIX_WEBHOOK_SECRET || 'demo_secret'
+          secret: import.meta.env.VITE_WIX_WEBHOOK_SECRET || 'demo_secret'
         }
       ];
 

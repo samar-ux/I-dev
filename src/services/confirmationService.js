@@ -1,7 +1,7 @@
 // خدمة إرسال كود التأكيد للعملاء
 class ConfirmationService {
   constructor() {
-    this.baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
+    this.baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
   }
 
   // إنشاء كود تأكيد فريد

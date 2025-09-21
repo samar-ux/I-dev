@@ -3,11 +3,10 @@ class WorldIdService {
   constructor() {
     this.isInitialized = false;
     
-    // استخدام متغير بيئة React أو قيمة افتراضية
+    // استخدام متغير بيئة Vite
     this.worldIdAppId = 
-      (typeof process !== 'undefined' && process.env && process.env.REACT_APP_WORLD_ID_APP_ID) ||
       (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_WORLD_ID_APP_ID) ||
-      window.REACT_APP_WORLD_ID_APP_ID ||
+      window.VITE_WORLD_ID_APP_ID ||
       'app_staging_1234567890abcdef'; // القيمة الافتراضية
   }
 
