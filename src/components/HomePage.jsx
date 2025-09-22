@@ -25,6 +25,7 @@ import {
   Recycle,
   RefreshCcw,
 } from "lucide-react";
+import SocialMediaLinks from "./SocialMediaLinks";
 import "../App.css";
 import { useTranslation } from "react-i18next";
 
@@ -521,6 +522,32 @@ const HomePage = ({ onViewChange }) => {
                 خدمة في جميع أنحاء المملكة
               </p>
             </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Social Media Section */}
+      <Card className="glass-card animate-fade-in-up animation-delay-1200">
+        <CardHeader>
+          <CardTitle className="text-xl md:text-2xl gradient-text arabic-text text-center">
+            تابعنا على وسائل التواصل الاجتماعي
+          </CardTitle>
+          <p className="text-sm text-muted-foreground arabic-text text-center">
+            ابق على اطلاع بأحدث أخبار ومستجدات منصة IDEV
+          </p>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col items-center space-y-4">
+            <SocialMediaLinks 
+              size="lg" 
+              variant="filled"
+              showLabels={true}
+              useDirectLinks={true}
+            />
+            <p className="text-xs text-muted-foreground arabic-text text-center max-w-md">
+              انضم إلى مجتمعنا المتنامي واحصل على نصائح حصرية حول الشحن والتوصيل، 
+              بالإضافة إلى عروض خاصة ومحتوى تعليمي مفيد.
+            </p>
           </div>
         </CardContent>
       </Card>

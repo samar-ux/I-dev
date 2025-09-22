@@ -21,6 +21,7 @@ import { Badge } from "./ui/badge";
 
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
+import SocialMediaLinks from "./SocialMediaLinks";
 import idevLogo from "../assets/3.jpg";
 import "../App.css";
 
@@ -157,7 +158,17 @@ const Layout = ({ children, currentView, onViewChange, user, onLogout }) => {
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-2">
+            <div className="hidden lg:flex items-center gap-4">
+              {/* Social Media Links */}
+              <SocialMediaLinks 
+                size="sm" 
+                variant="minimal"
+                className="hidden xl:flex"
+                useDirectLinks={true}
+              />
+              
+              {/* Navigation Items */}
+              <div className="flex items-center gap-2">
               {navigationItems.slice(0, 4).map((item) => {
                 const Icon = item.icon;
                 return (
@@ -176,6 +187,8 @@ const Layout = ({ children, currentView, onViewChange, user, onLogout }) => {
                   </Button>
                 );
               })}
+              </div>
+            </div>
             </div>
 
             {/* User Info and Status */}
@@ -214,8 +227,7 @@ const Layout = ({ children, currentView, onViewChange, user, onLogout }) => {
               </Button>
             </div>
           </div>
-        </div>
-      </header>
+        </header>
 
       <div className="flex">
         {/* Sidebar */}
@@ -285,13 +297,24 @@ const Layout = ({ children, currentView, onViewChange, user, onLogout }) => {
 
           {/* Sidebar Footer */}
           <div className="p-4 border-t border-primary/20">
-            <div className="glass-card p-3 text-center">
-              <p className="text-xs text-muted-foreground arabic-text">
-                الإصدار 2.0.0
-              </p>
-              <p className="text-xs text-primary arabic-text">
-                جميع الحقوق محفوظة © IDEV
-              </p>
+            <div className="glass-card p-3 text-center space-y-3">
+              {/* Social Media Links */}
+              <div className="flex justify-center">
+                <SocialMediaLinks 
+                  size="sm" 
+                  variant="outlined"
+                  useDirectLinks={true}
+                />
+              </div>
+              
+              <div className="space-y-1">
+                <p className="text-xs text-muted-foreground arabic-text">
+                  الإصدار 2.0.0
+                </p>
+                <p className="text-xs text-primary arabic-text">
+                  جميع الحقوق محفوظة © IDEV
+                </p>
+              </div>
             </div>
           </div>
         </aside>

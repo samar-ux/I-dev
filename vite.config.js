@@ -26,20 +26,17 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
-    minify: 'terser',
+    minify: 'esbuild',
+    esbuild: {
+      drop: ['console', 'debugger']
+    },
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
           web3: ['ethers', 'web3'],
-          ui: ['@radix-ui/react-dialog', '@radix-ui/react-tabs', '@radix-ui/react-button']
+          ui: ['@radix-ui/react-dialog', '@radix-ui/react-tabs']
         }
-      }
-    },
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true
       }
     }
   },
