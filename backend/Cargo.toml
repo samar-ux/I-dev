@@ -31,6 +31,8 @@ ethers = "2.0"
 web3 = "0.20"
 ic-agent = "0.12"
 ic-cdk = "0.12"
+ic-cdk-macros = "0.12"
+ic-stable-structures = "0.5"
 
 # HTTP Client
 reqwest = { version = "0.11", features = ["json"] }

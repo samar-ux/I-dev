@@ -1,0 +1,234 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "ICP Canister 93343-A7BDB-4F45F Dashboard",
+    "tags": ["icp", "canister", "93343-A7BDB-4F45F"],
+    "style": "dark",
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Canister Status",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "up{job=\"icp-canister-93343-A7BDB-4F45F\"}",
+            "legendFormat": "Canister Status"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "steps": [
+                {
+                  "color": "red",
+                  "value": 0
+                },
+                {
+                  "color": "green",
+                  "value": 1
+                }
+              ]
+            }
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 6,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": 2,
+        "title": "Request Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total[5m])",
+            "legendFormat": "{{method}} {{status}}"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "Requests/sec",
+            "min": 0
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 6,
+          "y": 0
+        }
+      },
+      {
+        "id": 3,
+        "title": "Response Time",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "95th percentile"
+          },
+          {
+            "expr": "histogram_quantile(0.50, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "50th percentile"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "Seconds",
+            "min": 0
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 6,
+          "x": 18,
+          "y": 0
+        }
+      },
+      {
+        "id": 4,
+        "title": "Error Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total{status=~\"5..\"}[5m]) / rate(http_requests_total[5m])",
+            "legendFormat": "Error Rate"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "Error Rate",
+            "min": 0,
+            "max": 1
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        }
+      },
+      {
+        "id": 5,
+        "title": "Cycles Balance",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "icp_cycles_balance",
+            "legendFormat": "Cycles Balance"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "Cycles",
+            "min": 0
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        }
+      },
+      {
+        "id": 6,
+        "title": "Memory Usage",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "icp_memory_usage_bytes",
+            "legendFormat": "Memory Used"
+          },
+          {
+            "expr": "icp_memory_limit_bytes",
+            "legendFormat": "Memory Limit"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "Bytes",
+            "min": 0
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        }
+      },
+      {
+        "id": 7,
+        "title": "Database Connections",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "postgres_stat_activity_count",
+            "legendFormat": "Active Connections"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "Connections",
+            "min": 0
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 16
+        }
+      },
+      {
+        "id": 8,
+        "title": "Redis Operations",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(redis_commands_total[5m])",
+            "legendFormat": "Commands/sec"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "Operations/sec",
+            "min": 0
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 24
+        }
+      }
+    ],
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "refresh": "30s",
+    "schemaVersion": 27,
+    "version": 1,
+    "links": [
+      {
+        "title": "ICP Dashboard",
+        "url": "https://dashboard.internetcomputer.org/canister/93343-A7BDB-4F45F"
+      },
+      {
+        "title": "Canister URL",
+        "url": "https://93343-A7BDB-4F45F.ic0.app"
+      }
+    ]
+  }
+}

@@ -1,0 +1,75 @@
+// Candid interface for I-dev Shipping Platform Backend
+// منصة شحن وتوصيل متطورة مع تكامل Web3 والبلوك تشين
+
+type User = record {
+  id: text;
+  email: text;
+  name: text;
+  phone: text;
+  address: text;
+  role: text;
+  created_at: text;
+  updated_at: text;
+};
+
+type Shipment = record {
+  id: text;
+  user_id: text;
+  tracking_number: text;
+  origin: text;
+  destination: text;
+  status: text;
+  weight: float64;
+  dimensions: text;
+  estimated_delivery: text;
+  actual_delivery: opt text;
+  created_at: text;
+  updated_at: text;
+};
+
+type Payment = record {
+  id: text;
+  shipment_id: text;
+  amount: float64;
+  currency: text;
+  payment_method: text;
+  status: text;
+  transaction_hash: opt text;
+  created_at: text;
+};
+
+type ApiResponse<T> = variant {
+  Ok: T;
+  Err: text;
+};
+
+service : {
+  // User Management
+  create_user: (text, text, text, text, text) -> (ApiResponse<User>);
+  get_user: (text) -> (ApiResponse<User>);
+  update_user: (text, text, text, text, text) -> (ApiResponse<User>);
+  delete_user: (text) -> (ApiResponse<bool>);
+  
+  // Shipment Management
+  create_shipment: (text, text, text, text, text, float64, text, text) -> (ApiResponse<Shipment>);
+  get_shipment: (text) -> (ApiResponse<Shipment>);
+  get_shipments_by_user: (text) -> (ApiResponse<vec Shipment>);
+  update_shipment_status: (text, text) -> (ApiResponse<Shipment>);
+  track_shipment: (text) -> (ApiResponse<Shipment>);
+  
+  // Payment Management
+  create_payment: (text, float64, text, text) -> (ApiResponse<Payment>);
+  get_payment: (text) -> (ApiResponse<Payment>);
+  update_payment_status: (text, text) -> (ApiResponse<Payment>);
+  
+  // Web3 Integration
+  process_web3_payment: (text, text, float64, text) -> (ApiResponse<Payment>);
+  get_blockchain_transaction: (text) -> (ApiResponse<text>);
+  
+  // Analytics
+  get_shipment_analytics: (text) -> (ApiResponse<text>);
+  get_user_analytics: (text) -> (ApiResponse<text>);
+  
+  // Health Check
+  health_check: () -> (text);
+}

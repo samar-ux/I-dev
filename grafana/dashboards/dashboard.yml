@@ -1,0 +1,16 @@
+# Grafana Dashboard Configuration for ICP Canister 93343-A7BDB-4F45F
+# تكوين لوحة التحكم في Grafana لـ ICP Canister 93343-A7BDB-4F45F
+
+apiVersion: 1
+
+providers:
+  - name: 'ICP Canister 93343-A7BDB-4F45F Dashboards'
+    orgId: 1
+    folder: 'ICP Canisters'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards
+      foldersFromFilesStructure: true

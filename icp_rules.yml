@@ -1,0 +1,138 @@
+# ICP Canister 93343-A7BDB-4F45F Alerting Rules
+# قواعد التنبيهات لـ ICP Canister 93343-A7BDB-4F45F
+
+groups:
+  - name: icp_canister_alerts
+    rules:
+      # Canister Health Check
+      - alert: ICPCanisterDown
+        expr: up{job="icp-canister-93343-A7BDB-4F45F"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          canister_id: "93343-A7BDB-4F45F"
+        annotations:
+          summary: "ICP Canister 93343-A7BDB-4F45F is down"
+          description: "ICP Canister 93343-A7BDB-4F45F has been down for more than 1 minute."
+
+      # High Error Rate
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: warning
+          canister_id: "93343-A7BDB-4F45F"
+        annotations:
+          summary: "High error rate detected"
+          description: "Error rate is above 10% for more than 2 minutes."
+
+      # High Response Time
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 2
+        for: 3m
+        labels:
+          severity: warning
+          canister_id: "93343-A7BDB-4F45F"
+        annotations:
+          summary: "High response time detected"
+          description: "95th percentile response time is above 2 seconds for more than 3 minutes."
+
+      # Low Cycles Balance
+      - alert: LowCyclesBalance
+        expr: icp_cycles_balance < 100000000000
+        for: 1m
+        labels:
+          severity: critical
+          canister_id: "93343-A7BDB-4F45F"
+        annotations:
+          summary: "Low cycles balance"
+          description: "ICP Canister cycles balance is below 100B cycles."
+
+      # High Memory Usage
+      - alert: HighMemoryUsage
+        expr: icp_memory_usage_bytes / icp_memory_limit_bytes > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          canister_id: "93343-A7BDB-4F45F"
+        annotations:
+          summary: "High memory usage"
+          description: "ICP Canister memory usage is above 80% for more than 5 minutes."
+
+      # Database Connection Issues
+      - alert: DatabaseConnectionIssues
+        expr: postgres_up == 0
+        for: 1m
+        labels:
+          severity: critical
+          canister_id: "93343-A7BDB-4F45F"
+        annotations:
+          summary: "Database connection issues"
+          description: "PostgreSQL database is not accessible."
+
+      # Redis Connection Issues
+      - alert: RedisConnectionIssues
+        expr: redis_up == 0
+        for: 1m
+        labels:
+          severity: warning
+          canister_id: "93343-A7BDB-4F45F"
+        annotations:
+          summary: "Redis connection issues"
+          description: "Redis cache is not accessible."
+
+      # High CPU Usage
+      - alert: HighCPUUsage
+        expr: rate(process_cpu_seconds_total[5m]) > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          canister_id: "93343-A7BDB-4F45F"
+        annotations:
+          summary: "High CPU usage"
+          description: "CPU usage is above 80% for more than 5 minutes."
+
+      # Disk Space Low
+      - alert: DiskSpaceLow
+        expr: (node_filesystem_avail_bytes / node_filesystem_size_bytes) < 0.1
+        for: 1m
+        labels:
+          severity: critical
+          canister_id: "93343-A7BDB-4F45F"
+        annotations:
+          summary: "Disk space low"
+          description: "Disk space is below 10%."
+
+      # SSL Certificate Expiry
+      - alert: SSLCertificateExpiry
+        expr: (ssl_certificate_expiry_seconds - time()) < 86400 * 30
+        for: 1m
+        labels:
+          severity: warning
+          canister_id: "93343-A7BDB-4F45F"
+        annotations:
+          summary: "SSL certificate expiring soon"
+          description: "SSL certificate will expire in less than 30 days."
+
+  - name: icp_performance_rules
+    rules:
+      # Performance Metrics
+      - record: icp_request_rate
+        expr: rate(http_requests_total[5m])
+        labels:
+          canister_id: "93343-A7BDB-4F45F"
+
+      - record: icp_response_time_p95
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))
+        labels:
+          canister_id: "93343-A7BDB-4F45F"
+
+      - record: icp_error_rate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m])
+        labels:
+          canister_id: "93343-A7BDB-4F45F"
+
+      - record: icp_uptime
+        expr: up{job="icp-canister-93343-A7BDB-4F45F"}
+        labels:
+          canister_id: "93343-A7BDB-4F45F"

@@ -1,0 +1,50 @@
+{
+  "name": "idev-shipping-platform",
+  "description": "منصة شحن وتوصيل متطورة مع تكامل Web3 والبلوك تشين",
+  "version": "1.0.0",
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:4943",
+      "type": "ephemeral"
+    },
+    "ic": {
+      "providers": ["https://ic0.app"],
+      "type": "persistent"
+    }
+  },
+  "canisters": {
+    "idev_shipping_frontend": {
+      "type": "assets",
+      "source": ["dist"],
+      "build": "npm run build",
+      "output": "dist"
+    },
+    "idev_shipping_backend": {
+      "type": "rust",
+      "package": "idev_shipping_backend",
+      "candid": "backend/src/idev_shipping_backend.did",
+      "build": "cargo build --target wasm32-unknown-unknown --release",
+      "output": "backend/target/wasm32-unknown-unknown/release/idev_shipping_backend.wasm"
+    }
+  },
+  "deployment": {
+    "cycles": {
+      "amount": "1000000000000",
+      "wallet": ""
+    },
+    "permissions": {
+      "controllers": [],
+      "public": true
+    }
+  },
+  "environment": {
+    "production": {
+      "ICP_NETWORK": "ic",
+      "ICP_PROVIDER": "https://ic0.app"
+    },
+    "development": {
+      "ICP_NETWORK": "local",
+      "ICP_PROVIDER": "http://127.0.0.1:4943"
+    }
+  }
+}

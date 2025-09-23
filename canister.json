@@ -1,0 +1,22 @@
+{
+  "canisters": {
+    "idev_shipping_frontend": {
+      "type": "frontend",
+      "build": "npm run build",
+      "output": "dist"
+    },
+    "idev_shipping_backend": {
+      "type": "backend",
+      "build": "cargo build --target wasm32-unknown-unknown --release",
+      "output": "target/wasm32-unknown-unknown/release/idev_shipping_backend.wasm"
+    }
+  },
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:4943"
+    },
+    "ic": {
+      "providers": ["https://ic0.app"]
+    }
+  }
+}

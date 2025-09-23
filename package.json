@@ -35,7 +35,17 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy:icp": "./deploy-icp.sh",
+    "deploy:icp:local": "dfx start --background && dfx deploy",
+    "deploy:icp:mainnet": "dfx deploy --network ic --with-cycles 1000000000000",
+    "test:icp": "./test-icp-deployment.sh",
+    "build:icp": "npm run build && cd backend && cargo build --target wasm32-unknown-unknown --release && cd ..",
+    "canister:status": "./manage-canister.sh status",
+    "canister:info": "./manage-canister.sh info",
+    "canister:test": "./manage-canister.sh test",
+    "canister:update": "./manage-canister.sh update",
+    "canister:logs": "./manage-canister.sh logs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",

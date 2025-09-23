@@ -1,0 +1,74 @@
+# Prometheus Configuration for ICP Canister 93343-A7BDB-4F45F
+# تكوين Prometheus لـ ICP Canister 93343-A7BDB-4F45F
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+scrape_configs:
+  # ICP Canister Metrics
+  - job_name: 'icp-canister-93343-A7BDB-4F45F'
+    static_configs:
+      - targets: ['93343-A7BDB-4F45F.ic0.app:443']
+    scheme: https
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+    scrape_timeout: 10s
+    honor_labels: true
+    params:
+      format: ['prometheus']
+
+  # Frontend Metrics
+  - job_name: 'frontend-metrics'
+    static_configs:
+      - targets: ['icp-frontend-93343-A7BDB-4F45F:5000']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # Backend Metrics
+  - job_name: 'backend-metrics'
+    static_configs:
+      - targets: ['icp-backend-93343-A7BDB-4F45F:3000']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # Nginx Metrics
+  - job_name: 'nginx-metrics'
+    static_configs:
+      - targets: ['icp-nginx-93343-A7BDB-4F45F:80']
+    metrics_path: '/nginx_status'
+    scrape_interval: 30s
+
+  # PostgreSQL Metrics
+  - job_name: 'postgres-metrics'
+    static_configs:
+      - targets: ['icp-postgres-93343-A7BDB-4F45F:5432']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # Redis Metrics
+  - job_name: 'redis-metrics'
+    static_configs:
+      - targets: ['icp-redis-93343-A7BDB-4F45F:6379']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+# Alerting rules
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          # - alertmanager:9093
+
+# Recording rules
+rule_files:
+  - "icp_rules.yml"

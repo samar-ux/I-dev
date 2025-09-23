@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "canisters": {
+    "idev_shipping_frontend": {
+      "type": "assets",
+      "source": ["dist"],
+      "build": "npm run build"
+    },
+    "idev_shipping_backend": {
+      "type": "rust",
+      "package": "idev_shipping_backend",
+      "candid": "backend/src/idev_shipping_backend.did",
+      "build": "cargo build --target wasm32-unknown-unknown --package idev_shipping_backend --release"
+    },
+    "idev_shipping_storage": {
+      "type": "rust",
+      "package": "idev_shipping_storage",
+      "candid": "backend/src/idev_shipping_storage.did"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:4943",
+      "type": "ephemeral"
+    },
+    "ic": {
+      "providers": ["https://ic0.app"],
+      "type": "persistent"
+    }
+  }
+}

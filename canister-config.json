@@ -1,0 +1,27 @@
+{
+  "canister_id": "93343-A7BDB-4F45F",
+  "network": "ic",
+  "provider": "https://ic0.app",
+  "frontend_url": "https://93343-A7BDB-4F45F.ic0.app",
+  "backend_url": "https://93343-A7BDB-4F45F.ic0.app/api",
+  "status": "active",
+  "deployment_date": "2024-01-01",
+  "cycles_balance": "1000000000000",
+  "controllers": [],
+  "permissions": {
+    "public": true,
+    "read": true,
+    "write": true
+  },
+  "endpoints": {
+    "health": "/health",
+    "api": "/api",
+    "frontend": "/",
+    "assets": "/assets"
+  },
+  "monitoring": {
+    "enabled": true,
+    "metrics_url": "https://93343-A7BDB-4F45F.ic0.app/metrics",
+    "logs_url": "https://93343-A7BDB-4F45F.ic0.app/logs"
+  }
+}

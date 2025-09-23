@@ -1,0 +1,84 @@
+# Dockerfile for ICP deployment
+# Dockerfile للنشر على ICP
+
+# Multi-stage build for frontend
+FROM node:18-alpine AS frontend-builder
+
+WORKDIR /app
+
+# Copy package files
+COPY package.json pnpm-lock.yaml ./
+
+# Install pnpm
+RUN npm install -g pnpm
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+# Copy source code
+COPY . .
+
+# Build frontend
+RUN pnpm run build
+
+# Rust backend builder
+FROM rust:1.75-alpine AS backend-builder
+
+# Install required packages
+RUN apk add --no-cache musl-dev pkgconfig openssl-dev
+
+WORKDIR /app
+
+# Copy backend source
+COPY backend/ ./backend/
+
+WORKDIR /app/backend
+
+# Build for wasm32-unknown-unknown target
+RUN rustup target add wasm32-unknown-unknown
+RUN cargo build --target wasm32-unknown-unknown --release
+
+# Final stage for ICP
+FROM alpine:latest
+
+# Install required packages
+RUN apk add --no-cache \
+    nodejs \
+    npm \
+    curl \
+    jq
+
+# Install dfx
+RUN curl -fsSL https://internetcomputer.org/install.sh | sh
+
+# Set up environment
+ENV PATH="/root/.local/bin:$PATH"
+ENV DFX_VERSION=0.15.0
+
+# Create app directory
+WORKDIR /app
+
+# Copy built frontend
+COPY --from=frontend-builder /app/dist ./dist
+
+# Copy built backend
+COPY --from=backend-builder /app/backend/target/wasm32-unknown-unknown/release/idev_shipping_backend.wasm ./backend.wasm
+
+# Copy configuration files
+COPY dfx.json ./
+COPY canister.json ./
+COPY backend/src/idev_shipping_backend.did ./
+
+# Copy deployment scripts
+COPY deploy-icp.sh ./
+RUN chmod +x deploy-icp.sh
+
+# Expose ports
+EXPOSE 4943 8000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:4943/health || exit 1
+
+# Default command
+CMD ["./deploy-icp.sh"]

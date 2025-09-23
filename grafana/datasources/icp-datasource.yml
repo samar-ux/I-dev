@@ -1,0 +1,66 @@
+# Grafana Data Source Configuration for ICP Canister 93343-A7BDB-4F45F
+# تكوين مصدر البيانات في Grafana لـ ICP Canister 93343-A7BDB-4F45F
+
+apiVersion: 1
+
+datasources:
+  - name: ICP Canister 93343-A7BDB-4F45F
+    type: prometheus
+    access: proxy
+    url: http://icp-prometheus-93343-A7BDB-4F45F:9090
+    isDefault: true
+    editable: true
+    jsonData:
+      httpMethod: POST
+      queryTimeout: 60s
+      timeInterval: 30s
+      manageAlerts: true
+      alertmanagerUid: alertmanager
+    secureJsonData: {}
+    uid: icp-canister-93343-A7BDB-4F45F
+
+  - name: ICP Metrics
+    type: prometheus
+    access: proxy
+    url: https://93343-A7BDB-4F45F.ic0.app/metrics
+    isDefault: false
+    editable: true
+    jsonData:
+      httpMethod: GET
+      queryTimeout: 60s
+      timeInterval: 30s
+      tlsSkipVerify: true
+    secureJsonData: {}
+    uid: icp-metrics-93343-A7BDB-4F45F
+
+  - name: PostgreSQL
+    type: postgres
+    access: proxy
+    url: icp-postgres-93343-A7BDB-4F45F:5432
+    database: web3_shipping_platform
+    user: web3shipping
+    isDefault: false
+    editable: true
+    jsonData:
+      sslmode: disable
+      maxOpenConns: 0
+      maxIdleConns: 2
+      connMaxLifetime: 14400
+      postgresVersion: 15
+      timescaledb: false
+    secureJsonData:
+      password: password123
+    uid: postgres-93343-A7BDB-4F45F
+
+  - name: Redis
+    type: redis
+    access: proxy
+    url: icp-redis-93343-A7BDB-4F45F:6379
+    isDefault: false
+    editable: true
+    jsonData:
+      client: standalone
+      timeout: 10s
+      pingInterval: 30s
+    secureJsonData: {}
+    uid: redis-93343-A7BDB-4F45F
