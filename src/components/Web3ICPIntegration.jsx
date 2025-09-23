@@ -12,6 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import cryptoService from "../services/cryptoService";
 import smartContractService from "../services/smartContractService";
 import icpBackendService from "../services/icpBackendService";
+import internetIdentityService from "../services/internetIdentityService";
 
 const Web3ICPIntegration = () => {
   const [isInitialized, setIsInitialized] = useState(false);
@@ -20,7 +21,8 @@ const Web3ICPIntegration = () => {
   const [systemStatus, setSystemStatus] = useState({
     crypto: 'disconnected',
     contracts: 'disconnected',
-    icp: 'disconnected'
+    icp: 'disconnected',
+    identity: 'disconnected'
   });
   const [cryptoBalances, setCryptoBalances] = useState({});
   const [contractStats, setContractStats] = useState({});
@@ -38,15 +40,25 @@ const Web3ICPIntegration = () => {
       await Promise.all([
         cryptoService.init(),
         smartContractService.init(),
-        icpBackendService.init()
+        icpBackendService.init(),
+        internetIdentityService.init()
       ]);
+      
+      // التحقق من حالة Internet Identity
+      const identityStatus = await internetIdentityService.checkAuthenticationStatus();
       
       setIsInitialized(true);
       setSystemStatus({
         crypto: 'connected',
         contracts: 'connected',
-        icp: 'connected'
+        icp: 'connected',
+        identity: identityStatus.authenticated ? 'connected' : 'disconnected'
       });
+      
+      // استعادة حالة المصادقة إذا كانت موجودة
+      if (identityStatus.authenticated) {
+        await internetIdentityService.restoreAuthenticationState();
+      }
       
       // تحميل البيانات الأولية
       await loadInitialData();
@@ -56,7 +68,8 @@ const Web3ICPIntegration = () => {
       setSystemStatus({
         crypto: 'error',
         contracts: 'error',
-        icp: 'error'
+        icp: 'error',
+        identity: 'error'
       });
     } finally {
       setIsLoading(false);
@@ -149,6 +162,37 @@ const Web3ICPIntegration = () => {
     }
   };
 
+  const handleConnectInternetIdentity = async () => {
+    try {
+      setIsLoading(true);
+      
+      // تعيين نوع المستخدم قبل تسجيل الدخول
+      internetIdentityService.setUserType('customer');
+      
+      const result = await internetIdentityService.authenticateWithInternetIdentity();
+      
+      if (result.success) {
+        setSystemStatus(prev => ({
+          ...prev,
+          identity: 'connected'
+        }));
+        
+        console.log('Internet Identity connected:', result.principal);
+        
+        // إعادة توجيه المستخدم إلى لوحة التحكم
+        if (result.redirectUrl) {
+          window.location.href = result.redirectUrl;
+        }
+      } else {
+        console.error('Internet Identity connection failed:', result.error);
+      }
+    } catch (error) {
+      console.error('Failed to connect Internet Identity:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleRefreshData = async () => {
     setIsLoading(true);
     await loadInitialData();
@@ -194,7 +238,7 @@ const Web3ICPIntegration = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
+          className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8"
         >
           <Card className="bg-white/10 backdrop-blur-lg border border-white/20">
             <CardContent className="p-6">
@@ -253,6 +297,27 @@ const Web3ICPIntegration = () => {
                   <span className="text-sm font-medium">
                     {systemStatus.icp === 'connected' ? 'متصل' : 
                      systemStatus.icp === 'error' ? 'خطأ' : 'غير متصل'}
+                  </span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-white/10 backdrop-blur-lg border border-white/20">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Lock className="w-8 h-8 text-cyan-400" />
+                  <div>
+                    <h3 className="text-white font-semibold">Internet Identity</h3>
+                    <p className="text-white/70 text-sm">مصادقة ICP</p>
+                  </div>
+                </div>
+                <div className={`flex items-center gap-2 ${getStatusColor(systemStatus.identity)}`}>
+                  {getStatusIcon(systemStatus.identity)}
+                  <span className="text-sm font-medium">
+                    {systemStatus.identity === 'connected' ? 'متصل' : 
+                     systemStatus.identity === 'error' ? 'خطأ' : 'غير متصل'}
                   </span>
                 </div>
               </div>
@@ -367,6 +432,14 @@ const Web3ICPIntegration = () => {
                   >
                     <Wallet className="w-4 h-4 mr-2" />
                     ربط MetaMask
+                  </Button>
+                  <Button
+                    onClick={handleConnectInternetIdentity}
+                    disabled={isLoading}
+                    className="bg-cyan-600 hover:bg-cyan-700 text-white"
+                  >
+                    <Lock className="w-4 h-4 mr-2" />
+                    تسجيل الدخول بـ ICP Identity
                   </Button>
                   <Button
                     onClick={handleRefreshData}
