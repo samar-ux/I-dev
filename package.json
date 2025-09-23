@@ -45,7 +45,9 @@
     "canister:info": "./manage-canister.sh info",
     "canister:test": "./manage-canister.sh test",
     "canister:update": "./manage-canister.sh update",
-    "canister:logs": "./manage-canister.sh logs"
+    "canister:logs": "./manage-canister.sh logs",
+    "setup:icp": "./setup-icp-windows.sh",
+    "install:dfx": "./install-dfx-windows.sh"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
