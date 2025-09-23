@@ -1,8 +1,36 @@
 {
-  "name": "shipping-delivery-platform",
+  "name": "idev-shipping-platform",
+  "description": "منصة شحن وتوصيل متطورة مع تكامل Web3 والبلوك تشين",
+  "version": "0.1.0",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "keywords": [
+    "shipping",
+    "delivery",
+    "web3",
+    "blockchain",
+    "ethereum",
+    "polygon",
+    "bsc",
+    "icp",
+    "react",
+    "vite",
+    "tailwindcss"
+  ],
+  "author": {
+    "name": "Samar UX",
+    "email": "support@idev-shipping.com",
+    "url": "https://github.com/samar-ux"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samar-ux/I-dev.git"
+  },
+  "bugs": {
+    "url": "https://github.com/samar-ux/I-dev/issues"
+  },
+  "homepage": "https://github.com/samar-ux/I-dev#readme",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
