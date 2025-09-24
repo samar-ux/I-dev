@@ -8,7 +8,7 @@ edition = "2021"
 axum = "0.7"
 tokio = { version = "1.0", features = ["full"] }
 tower = "0.4"
-tower-http = { version = "0.5", features = ["cors", "trace"] }
+tower-http = { version = "0.5", features = ["cors", "trace", "compression-gzip"] }
 hyper = { version = "1.0", features = ["full"] }
 
 # Serialization
@@ -16,7 +16,7 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 
 # Database
-sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "chrono", "uuid"] }
+sqlx = { version = "0.8", features = ["runtime-tokio-rustls", "postgres", "chrono", "uuid"] }
 chrono = { version = "0.4", features = ["serde"] }
 uuid = { version = "1.0", features = ["v4", "serde"] }
 
@@ -29,17 +29,16 @@ base64 = "0.21"
 # Web3 & Blockchain
 ethers = "2.0"
 web3 = "0.20"
-ic-agent = "0.12"
-ic-cdk = "0.12"
-ic-cdk-macros = "0.12"
-ic-stable-structures = "0.5"
+ic-agent = "0.15"
+ic-cdk = "0.15"
+ic-cdk-macros = "0.15"
+ic-stable-structures = "0.6"
 
 # HTTP Client
-reqwest = { version = "0.11", features = ["json"] }
+reqwest = { version = "0.12", features = ["json"] }
 
 # Configuration
 config = "0.14"
-dotenv = "0.15"
 
 # Logging
 tracing = "0.1"
@@ -66,36 +65,31 @@ governor = "0.6"
 # Background tasks
 sqlx-migrate = "0.1"
 
-# CORS and Compression (combined)
-tower-http = { version = "0.5", features = ["cors", "compression-gzip"] }
-
 # Metrics
 metrics = "0.22"
 metrics-exporter-prometheus = "0.13"
 
 # Cache
-redis = { version = "0.24", features = ["tokio-comp"] }
+redis = { version = "0.25", features = ["tokio-comp"] }
 
 # Email
-lettre = "0.11"
+lettre = "0.12"
 
 # SMS
-twilio = "0.3"
+twilio = "0.4"
 
 # QR Code generation
-qrcode = "0.14"
+qrcode = "0.15"
 
 # Image processing
-image = "0.24"
+image = "0.25"
 
 # Cryptography
 ring = "0.17"
-aes-gcm = "0.10"
+aes-gcm = "0.11"
 
 # Time
 time = "0.3"
-
-# UUID (removed duplicate)
 
 # Environment
 dotenvy = "0.15"
