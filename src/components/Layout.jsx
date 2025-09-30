@@ -16,6 +16,7 @@ import {
   LogOut,
   BarChart3,
   UserCircle,
+  Building,
 } from "lucide-react";
 import { Badge } from "./ui/badge";
 
@@ -108,6 +109,22 @@ const Layout = ({ children, currentView, onViewChange, user, onLogout }) => {
     }
   };
 
+  // دالة للحصول على أيقونة ولون نوع المستخدم
+  const getUserTypeIcon = (userType) => {
+    switch (userType) {
+      case 'store_owner':
+        return { icon: Store, color: 'bg-green-500' };
+      case 'customer':
+        return { icon: UserCircle, color: 'bg-blue-500' };
+      case 'company':
+        return { icon: Building, color: 'bg-purple-500' };
+      case 'driver':
+        return { icon: Truck, color: 'bg-orange-500' };
+      default:
+        return { icon: User, color: 'bg-gray-500' };
+    }
+  };
+
   return (
     <div className="min-h-screen starry-bg">
       {/* Professional Header */}
@@ -147,60 +164,35 @@ const Layout = ({ children, currentView, onViewChange, user, onLogout }) => {
               </div>
             </div>
 
-            {/* Center - Navigation Links */}
-            <div className="hidden lg:flex items-center gap-1">
-              {navigationItems.slice(4, 8).map((item) => {
-                const Icon = item.icon;
-                const isActive = currentView === item.id;
-                return (
-                  <Button
-                    key={item.id}
-                    variant="ghost"
-                    onClick={() => handleNavigation(item.id)}
-                    className={`arabic-text px-4 py-2 rounded-lg transition-all duration-200 font-medium ${
-                      isActive
-                        ? "bg-[#6dd5ed] text-[#0b1426] shadow-lg transform scale-105"
-                        : "text-white hover:bg-white/10 hover:text-[#6dd5ed] hover:transform hover:scale-105"
-                    }`}
-                  >
-                    <Icon className="h-4 w-4 ml-2" />
-                    <span>{item.label}</span>
-                  </Button>
-                );
-              })}
-            </div>
 
             {/* Right Side - User Profile, Status and Actions */}
             <div className="flex items-center gap-3">
-              {/* User Profile Button */}
-              {user && (
-                <Button
-                  onClick={() => {
-                    // Open user profile modal or navigate to profile
-                    console.log('فتح بروفايل المستخدم');
-                  }}
-                  className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/10 transition-all duration-200 group"
-                  title="الملف الشخصي"
-                >
-                  <div className="text-right arabic-text">
-                    <p className="text-sm font-semibold text-white">{user.name}</p>
-                    <p className="text-xs text-[#6dd5ed]">{user.userType}</p>
+              {/* User Profile Icon */}
+              {user && (() => {
+                const userTypeInfo = getUserTypeIcon(user.userType);
+                const UserIcon = userTypeInfo.icon;
+                return (
+                  <div className="relative group">
+                    <div className={`w-10 h-10 ${userTypeInfo.color} rounded-full flex items-center justify-center border-2 border-white/20 hover:border-white/40 transition-all duration-300 cursor-pointer group-hover:scale-110 group-hover:shadow-lg`}>
+                      <UserIcon className="w-5 h-5 text-white group-hover:rotateY-180 transition-transform duration-600" />
                   </div>
-                  <div className="w-9 h-9 bg-gradient-to-br from-[#6dd5ed]/20 to-[#5bc5de]/20 rounded-full flex items-center justify-center border border-[#6dd5ed]/30 group-hover:border-[#6dd5ed]/50 transition-all duration-200">
-                    <User className="w-4 h-4 text-[#6dd5ed]" />
+                    {/* تأثير الهالة */}
+                    <div className={`absolute inset-0 ${userTypeInfo.color} rounded-full opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-300`}></div>
+                    {/* تأثير النبض */}
+                    <div className={`absolute inset-0 ${userTypeInfo.color} rounded-full opacity-0 group-hover:opacity-30 animate-ping`}></div>
                   </div>
-                </Button>
-              )}
+                );
+              })()}
               
               {/* Status Badge */}
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <Badge
-                  variant="outline"
+              <Badge
+                variant="outline"
                   className="text-green-400 border-green-400/50 bg-green-400/10 font-medium"
-                >
-                  متصل
-                </Badge>
+              >
+                متصل
+              </Badge>
               </div>
               
               {/* Action Buttons */}
@@ -214,20 +206,20 @@ const Layout = ({ children, currentView, onViewChange, user, onLogout }) => {
                   <Settings className="h-4 w-4" />
                 </Button>
                 
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={onLogout}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onLogout}
                   className="text-red-400 hover:text-red-300 hover:bg-red-400/10 p-2 rounded-lg transition-all duration-200"
-                  title="تسجيل الخروج"
-                >
+                title="تسجيل الخروج"
+              >
                   <LogOut className="h-4 w-4" />
-                </Button>
+              </Button>
               </div>
             </div>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
 
       <div className="flex">
         {/* Sidebar */}
