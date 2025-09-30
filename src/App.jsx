@@ -15,6 +15,7 @@ import UserProfile from "./components/UserProfile";
 import Settings from "./components/Settings";
 import Web3Integration from "./components/Web3Integration";
 import web3Service from "./services/web3Service";
+import internetIdentityService from "./services/internetIdentityService";
 import "./App.css";
 
 function App() {
@@ -31,9 +32,39 @@ function App() {
     const hasSeenWelcome = localStorage.getItem("hasSeenWelcome");
     const savedUser = localStorage.getItem("currentUser");
     
+    // التحقق من تسجيل الدخول عبر Internet Identity
+    const checkInternetIdentityAuth = async () => {
+      try {
+        const authStatus = await internetIdentityService.checkAuthenticationStatus();
+        if (authStatus.authenticated) {
+          // إنشاء بيانات مستخدم من Internet Identity
+          const icpUser = {
+            name: "مستخدم Internet Identity",
+            email: authStatus.principal,
+            userType: localStorage.getItem('user_type') || 'customer',
+            verificationLevel: 'internet_identity',
+            principal: authStatus.principal,
+            authMethod: 'internet_identity'
+          };
+          
+          setUser(icpUser);
+          setIsAuthenticated(true);
+          localStorage.setItem("currentUser", JSON.stringify(icpUser));
+          return true;
+        }
+      } catch (error) {
+        console.error('Error checking Internet Identity auth:', error);
+      }
+      return false;
+    };
+    
+    // التحقق من المصادقة المحلية أولاً
     if (savedUser) {
       setUser(JSON.parse(savedUser));
       setIsAuthenticated(true);
+    } else {
+      // التحقق من Internet Identity
+      checkInternetIdentityAuth();
     }
     
     if (hasSeenWelcome === "true") {
@@ -142,16 +173,39 @@ function App() {
   const handleAuthSuccess = (userData) => {
     setUser(userData);
     setIsAuthenticated(true);
+    setShowWelcome(false); // إخفاء صفحة الترحيب بعد تسجيل الدخول الناجح
     localStorage.setItem("currentUser", JSON.stringify(userData));
   };
 
-  const handleLogout = () => {
-    setUser(null);
-    setIsAuthenticated(false);
-    localStorage.removeItem("currentUser");
-    localStorage.removeItem("hasSeenWelcome"); // إزالة علامة مشاهدة الصفحة الافتتاحية
-    setCurrentView("home");
-    setShowWelcome(true); // إظهار الصفحة الافتتاحية
+  const handleLogout = async () => {
+    try {
+      // تسجيل الخروج من Internet Identity إذا كان المستخدم مسجل دخول عبره
+      if (user && user.authMethod === 'internet_identity') {
+        await internetIdentityService.logout();
+      }
+      
+      // تنظيف البيانات المحلية
+      setUser(null);
+      setIsAuthenticated(false);
+      localStorage.removeItem("currentUser");
+      localStorage.removeItem("hasSeenWelcome");
+      localStorage.removeItem("icp_authenticated");
+      localStorage.removeItem("icp_principal");
+      localStorage.removeItem("icp_login_time");
+      localStorage.removeItem("icp_auth_data");
+      localStorage.removeItem("user_type");
+      
+      setCurrentView("home");
+      setShowWelcome(true); // إظهار الصفحة الافتتاحية
+    } catch (error) {
+      console.error('Error during logout:', error);
+      // تنظيف البيانات المحلية حتى في حالة الخطأ
+      setUser(null);
+      setIsAuthenticated(false);
+      localStorage.removeItem("currentUser");
+      setCurrentView("home");
+      setShowWelcome(true);
+    }
   };
 
   const handleViewChange = (viewId) => {

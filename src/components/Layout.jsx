@@ -159,14 +159,6 @@ const Layout = ({ children, currentView, onViewChange, user, onLogout }) => {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-4">
-              {/* Social Media Links */}
-              <SocialMediaLinks 
-                size="sm" 
-                variant="minimal"
-                className="hidden xl:flex"
-                useDirectLinks={true}
-              />
-              
               {/* Navigation Items */}
               <div className="flex items-center gap-2">
               {navigationItems.slice(0, 4).map((item) => {
