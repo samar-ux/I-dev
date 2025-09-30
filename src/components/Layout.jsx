@@ -110,116 +110,124 @@ const Layout = ({ children, currentView, onViewChange, user, onLogout }) => {
 
   return (
     <div className="min-h-screen starry-bg">
-      {/* Header */}
-      <header className="glass-card border-b border-primary/20 sticky top-0 z-40 backdrop-blur-md">
-        <div className="container-responsive">
-          <div className="flex items-center justify-between py-3 md:py-4">
-            {/* Logo and Brand */}
-            <div className="flex items-center gap-3 md:gap-4">
+      {/* Professional Header */}
+      <header className="sticky top-0 z-50 bg-[#0b1426]/95 backdrop-blur-lg border-b border-[#6dd5ed]/30 shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Left Side - Mobile Menu and Logo */}
+            <div className="flex items-center gap-4">
+              {/* Mobile Menu Button */}
               <Button
                 variant="ghost"
-                size={isMobile ? "sm" : "icon"}
+                size="sm"
                 onClick={toggleSidebar}
-                className="lg:hidden text-primary hover:bg-primary/10 focus-visible:focus-visible"
+                className="lg:hidden text-white hover:bg-white/10 p-2 rounded-lg transition-all duration-200"
                 aria-label="فتح القائمة"
               >
                 {sidebarOpen ? (
-                  <X className={`${isMobile ? "h-5 w-5" : "h-6 w-6"}`} />
+                  <X className="h-5 w-5" />
                 ) : (
-                  <Menu className={`${isMobile ? "h-5 w-5" : "h-6 w-6"}`} />
+                  <Menu className="h-5 w-5" />
                 )}
               </Button>
 
-              <div className="flex items-center gap-2 md:gap-3">
+              {/* Logo and Brand */}
+              <div className="flex items-center gap-3">
                 <img
                   src={idevLogo}
                   alt="IDEV Logo"
                   className={`rounded-full idev-logo ${
-                    isMobile ? "w-8 h-8" : "w-12 h-12"
+                    isMobile ? "w-8 h-8" : "w-10 h-10"
                   }`}
                 />
                 <div className="arabic-text">
-                  <h1
-                    className={`font-bold gradient-text ${
-                      isMobile ? "text-lg" : "text-xl"
-                    }`}
-                  >
-                    IDEV
-                  </h1>
-                  <p
-                    className={`text-muted-foreground ${
-                      isMobile ? "text-xs" : "text-sm"
-                    }`}
-                  >
-                    منصة الشحن والتوصيل
-                  </p>
+                  <h1 className="text-xl font-bold text-white tracking-tight">IDev</h1>
+                  <p className="text-xs text-[#6dd5ed] font-medium">نظام إدارة الشحنات</p>
                 </div>
               </div>
             </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-4">
-              {/* Navigation Items */}
-              <div className="flex items-center gap-2">
-              {navigationItems.slice(0, 4).map((item) => {
+            {/* Center - Navigation Links */}
+            <div className="hidden lg:flex items-center gap-1">
+              {navigationItems.slice(4, 8).map((item) => {
                 const Icon = item.icon;
+                const isActive = currentView === item.id;
                 return (
                   <Button
                     key={item.id}
-                    variant={currentView === item.id ? "default" : "ghost"}
+                    variant="ghost"
                     onClick={() => handleNavigation(item.id)}
-                    className={`arabic-text transition-all duration-200 focus-visible:focus-visible ${
-                      currentView === item.id
-                        ? "btn-primary text-primary-foreground shadow-lg"
-                        : "text-foreground hover:bg-primary/10 hover:text-primary"
+                    className={`arabic-text px-4 py-2 rounded-lg transition-all duration-200 font-medium ${
+                      isActive
+                        ? "bg-[#6dd5ed] text-[#0b1426] shadow-lg transform scale-105"
+                        : "text-white hover:bg-white/10 hover:text-[#6dd5ed] hover:transform hover:scale-105"
                     }`}
                   >
                     <Icon className="h-4 w-4 ml-2" />
-                    <span className="hidden xl:inline">{item.label}</span>
+                    <span>{item.label}</span>
                   </Button>
                 );
               })}
-              </div>
-            </div>
             </div>
 
-            {/* User Info and Status */}
-            <div className="flex items-center gap-2">
-              {/* User Info */}
+            {/* Right Side - User Profile, Status and Actions */}
+            <div className="flex items-center gap-3">
+              {/* User Profile Button */}
               {user && (
-                <div className="hidden md:flex items-center gap-2 ml-2">
+                <Button
+                  onClick={() => {
+                    // Open user profile modal or navigate to profile
+                    console.log('فتح بروفايل المستخدم');
+                  }}
+                  className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/10 transition-all duration-200 group"
+                  title="الملف الشخصي"
+                >
                   <div className="text-right arabic-text">
-                    <p className="text-sm font-medium text-gray-800">{user.name}</p>
-                    <p className="text-xs text-muted-foreground">{user.userType}</p>
+                    <p className="text-sm font-semibold text-white">{user.name}</p>
+                    <p className="text-xs text-[#6dd5ed]">{user.userType}</p>
                   </div>
-                  <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-                    <User className="w-4 h-4 text-primary" />
+                  <div className="w-9 h-9 bg-gradient-to-br from-[#6dd5ed]/20 to-[#5bc5de]/20 rounded-full flex items-center justify-center border border-[#6dd5ed]/30 group-hover:border-[#6dd5ed]/50 transition-all duration-200">
+                    <User className="w-4 h-4 text-[#6dd5ed]" />
                   </div>
-                </div>
+                </Button>
               )}
               
               {/* Status Badge */}
-              <Badge
-                variant="outline"
-                className="text-primary border-primary/50"
-              >
-                متصل
-              </Badge>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                <Badge
+                  variant="outline"
+                  className="text-green-400 border-green-400/50 bg-green-400/10 font-medium"
+                >
+                  متصل
+                </Badge>
+              </div>
               
-              {/* Logout Button */}
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={onLogout}
-                className="text-red-500 hover:text-red-600 hover:bg-red-50"
-                title="تسجيل الخروج"
-              >
-                <LogOut className="w-4 h-4" />
-                <span className="hidden md:inline mr-1">خروج</span>
-              </Button>
+              {/* Action Buttons */}
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-white hover:bg-white/10 p-2 rounded-lg transition-all duration-200"
+                  title="الإعدادات"
+                >
+                  <Settings className="h-4 w-4" />
+                </Button>
+                
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={onLogout}
+                  className="text-red-400 hover:text-red-300 hover:bg-red-400/10 p-2 rounded-lg transition-all duration-200"
+                  title="تسجيل الخروج"
+                >
+                  <LogOut className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
           </div>
-        </header>
+        </div>
+      </header>
 
       <div className="flex">
         {/* Sidebar */}
