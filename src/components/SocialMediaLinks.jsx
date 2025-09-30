@@ -39,7 +39,7 @@ const SocialMediaLinks = ({
     },
     {
       name: 'LinkedIn',
-      url: 'https://www.linkedin.com/in/i-dev-company-4806b8294/',
+      url: 'https://www.linkedin.com/in/i-dev-agency-4806b8294',
       icon: FaLinkedin,
       color: 'text-blue-700 hover:text-blue-800',
       bgColor: 'hover:bg-blue-50 dark:hover:bg-blue-900/20'
