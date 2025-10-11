@@ -105,7 +105,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
   // إذا لم يتم اختيار نوع المستخدم، عرض صفحة اختيار الأيقونات
   if (!selectedUserType) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-[#0d4f5c] via-[#1a4d5a] to-[#2a5a67] flex items-center justify-center p-4">
         {/* Background Animation */}
         <div className="absolute inset-0 overflow-hidden">
           {[...Array(20)].map((_, i) => (
@@ -259,7 +259,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
     const borderColorClass = selectedType?.borderColor || 'border-blue-200';
     
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-[#0d4f5c] via-[#1a4d5a] to-[#2a5a67] flex items-center justify-center p-4">
         {/* Background Animation */}
         <div className="absolute inset-0 overflow-hidden">
           {[...Array(20)].map((_, i) => (

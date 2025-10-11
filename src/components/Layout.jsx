@@ -128,7 +128,7 @@ const Layout = ({ children, currentView, onViewChange, user, onLogout }) => {
   return (
     <div className="min-h-screen starry-bg">
       {/* Professional Header */}
-      <header className="sticky top-0 z-50 bg-[#0b1426]/95 backdrop-blur-lg border-b border-[#6dd5ed]/30 shadow-lg">
+      <header className="sticky top-0 z-50 bg-[#0d4f5c]/95 backdrop-blur-lg border-b border-[#6dd5ed]/30 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Left Side - Mobile Menu and Logo */}

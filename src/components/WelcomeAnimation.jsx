@@ -51,7 +51,7 @@ const WelcomeAnimation = ({ onComplete }) => {
   if (!showWelcome) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-[#0f172a] overflow-hidden">
+    <div className="fixed inset-0 z-50 bg-[#0d4f5c] overflow-hidden">
       {/* Language Selection Ball - Top Right */}
       <div className="absolute top-6 right-6 z-60">
         {/* Main Language Ball */}
@@ -63,21 +63,42 @@ const WelcomeAnimation = ({ onComplete }) => {
         >
           <motion.button
             onClick={() => setShowLanguageBalls(!showLanguageBalls)}
-            className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
+            className="w-18 h-18 bg-gradient-to-br from-teal-500 via-cyan-500 to-teal-600 rounded-full flex items-center justify-center shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer border-2 border-white/20 backdrop-blur-sm relative overflow-hidden group"
+            whileHover={{ scale: 1.15, rotate: 5 }}
+            whileTap={{ scale: 0.9 }}
             animate={{
               boxShadow: [
-                "0 0 20px rgba(6, 182, 212, 0.5)",
-                "0 0 40px rgba(6, 182, 212, 0.8)",
-                "0 0 20px rgba(6, 182, 212, 0.5)",
+                "0 0 25px rgba(13, 79, 92, 0.6)",
+                "0 0 50px rgba(13, 79, 92, 0.9)",
+                "0 0 25px rgba(13, 79, 92, 0.6)",
               ],
             }}
             transition={{
-              boxShadow: { duration: 2, repeat: Infinity },
+              boxShadow: { duration: 3, repeat: Infinity },
             }}
           >
-            <Languages className="w-8 h-8 text-white" />
+            {/* Shimmer effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+            
+            {/* Inner glow */}
+            <div className="absolute inset-2 rounded-full bg-gradient-to-br from-white/20 to-transparent"></div>
+            
+            {/* Icon with enhanced styling */}
+            <Languages className="w-9 h-9 text-white relative z-10 drop-shadow-lg" />
+            
+            {/* Pulsing ring */}
+            <motion.div
+              className="absolute inset-0 rounded-full border-2 border-white/30"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.5, 0.8, 0.5],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
           </motion.button>
 
           {/* Language Option Balls */}
@@ -94,7 +115,7 @@ const WelcomeAnimation = ({ onComplete }) => {
                   <motion.button
                     key={lang.code}
                     onClick={() => handleLanguageChange(lang.code)}
-                    className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 cursor-pointer border border-white/20"
+                    className="w-14 h-14 bg-gradient-to-br from-teal-400/20 to-cyan-400/20 backdrop-blur-md rounded-full flex items-center justify-center hover:from-teal-400/40 hover:to-cyan-400/40 transition-all duration-500 cursor-pointer border-2 border-white/30 hover:border-white/50 shadow-lg hover:shadow-xl relative overflow-hidden group"
                     initial={{ x: 50, opacity: 0, scale: 0 }}
                     animate={{ x: 0, opacity: 1, scale: 1 }}
                     exit={{ x: 50, opacity: 0, scale: 0 }}
@@ -104,10 +125,30 @@ const WelcomeAnimation = ({ onComplete }) => {
                       type: "spring",
                       stiffness: 200
                     }}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileHover={{ scale: 1.15, rotate: 10 }}
+                    whileTap={{ scale: 0.9 }}
                   >
-                    <span className="text-lg">{lang.flag}</span>
+                    {/* Shimmer effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                    
+                    {/* Inner glow */}
+                    <div className="absolute inset-1 rounded-full bg-gradient-to-br from-white/10 to-transparent"></div>
+                    
+                    <span className="text-xl relative z-10 drop-shadow-md">{lang.flag}</span>
+                    
+                    {/* Pulsing effect */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full border border-white/20"
+                      animate={{
+                        scale: [1, 1.1, 1],
+                        opacity: [0.3, 0.6, 0.3],
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
                   </motion.button>
                 ))}
               </motion.div>

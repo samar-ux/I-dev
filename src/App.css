@@ -45,20 +45,20 @@
   --radius: 0.75rem;
 
   /* IDEV Professional Brand Colors - Enhanced */
-  --background: #0b1426;
+  --background: #0d4f5c;
   --foreground: #ffffff;
   --card: #1a2332;
   --card-foreground: #ffffff;
   --popover: #1a2332;
   --popover-foreground: #ffffff;
   --primary: #6dd5ed;
-  --primary-foreground: #0b1426;
+  --primary-foreground: #0d4f5c;
   --secondary: #2a3441;
   --secondary-foreground: #ffffff;
   --muted: #2a3441;
   --muted-foreground: #94a3b8;
   --accent: #6dd5ed;
-  --accent-foreground: #0b1426;
+  --accent-foreground: #0d4f5c;
   --destructive: #ef4444;
   --border: #2a3441;
   --input: #2a3441;
@@ -75,7 +75,7 @@
   --sidebar: #1a2332;
   --sidebar-foreground: #ffffff;
   --sidebar-primary: #6dd5ed;
-  --sidebar-primary-foreground: #0b1426;
+  --sidebar-primary-foreground: #0d4f5c;
   --sidebar-accent: #2a3441;
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #2a3441;
@@ -113,20 +113,20 @@
 }
 
 .dark {
-  --background: #0b1426;
+  --background: #0d4f5c;
   --foreground: #ffffff;
   --card: #1a2332;
   --card-foreground: #ffffff;
   --popover: #1a2332;
   --popover-foreground: #ffffff;
   --primary: #6dd5ed;
-  --primary-foreground: #0b1426;
+  --primary-foreground: #0d4f5c;
   --secondary: #2a3441;
   --secondary-foreground: #ffffff;
   --muted: #2a3441;
   --muted-foreground: #94a3b8;
   --accent: #6dd5ed;
-  --accent-foreground: #0b1426;
+  --accent-foreground: #0d4f5c;
   --destructive: #ef4444;
   --border: #2a3441;
   --input: #2a3441;
@@ -139,7 +139,7 @@
   --sidebar: #1a2332;
   --sidebar-foreground: #ffffff;
   --sidebar-primary: #6dd5ed;
-  --sidebar-primary-foreground: #0b1426;
+  --sidebar-primary-foreground: #0d4f5c;
   --sidebar-accent: #2a3441;
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #2a3441;
@@ -181,10 +181,10 @@
 .starry-bg {
   background: linear-gradient(
     135deg,
-    #0b1426 0%,
-    #1a2332 30%,
-    #2a3441 70%,
-    #0b1426 100%
+    #0d4f5c 0%,
+    #1a4d5a 30%,
+    #2a5a67 70%,
+    #0d4f5c 100%
   );
   position: relative;
   overflow: hidden;
@@ -221,7 +221,7 @@
   background: radial-gradient(
     ellipse at center,
     transparent 0%,
-    rgba(11, 20, 38, 0.1) 100%
+    rgba(13, 79, 92, 0.1) 100%
   );
   z-index: 1;
 }
@@ -365,7 +365,7 @@
 .btn-primary {
   background: linear-gradient(135deg, #6dd5ed 0%, #5bc5de 100%);
   border: none;
-  color: #0b1426;
+  color: #0d4f5c;
   font-weight: 600;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
