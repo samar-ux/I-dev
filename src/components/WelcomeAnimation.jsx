@@ -51,7 +51,7 @@ const WelcomeAnimation = ({ onComplete }) => {
   if (!showWelcome) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-[#0d4f5c] overflow-hidden">
+    <div className="fixed inset-0 z-50 bg-[#0a1628] overflow-hidden">
       {/* Language Selection Ball - Top Right */}
       <div className="absolute top-6 right-6 z-60">
         {/* Main Language Ball */}
@@ -68,9 +68,9 @@ const WelcomeAnimation = ({ onComplete }) => {
             whileTap={{ scale: 0.9 }}
             animate={{
               boxShadow: [
-                "0 0 25px rgba(13, 79, 92, 0.6)",
-                "0 0 50px rgba(13, 79, 92, 0.9)",
-                "0 0 25px rgba(13, 79, 92, 0.6)",
+                "0 0 25px rgba(10, 22, 40, 0.6)",
+                "0 0 50px rgba(10, 22, 40, 0.9)",
+                "0 0 25px rgba(10, 22, 40, 0.6)",
               ],
             }}
             transition={{
@@ -184,7 +184,7 @@ const WelcomeAnimation = ({ onComplete }) => {
 
         {/* Floating geometric shapes */}
         <motion.div
-          className="absolute top-20 left-20 w-4 h-4 border-2 border-cyan-400 rounded-full"
+          className="absolute top-20 left-20 w-4 h-4 border-2 border-[#22d3ee] rounded-full"
           animate={{
             y: [0, -20, 0],
             rotate: [0, 180, 360],
@@ -197,7 +197,7 @@ const WelcomeAnimation = ({ onComplete }) => {
         />
 
         <motion.div
-          className="absolute top-40 right-32 w-6 h-6 border-2 border-blue-400"
+          className="absolute top-40 right-32 w-6 h-6 border-2 border-[#06b6d4]"
           animate={{
             rotate: [0, 45, 0],
             scale: [1, 1.2, 1],
@@ -210,7 +210,7 @@ const WelcomeAnimation = ({ onComplete }) => {
         />
 
         <motion.div
-          className="absolute bottom-32 left-40 w-3 h-3 bg-cyan-400 rounded-full"
+          className="absolute bottom-32 left-40 w-3 h-3 bg-[#22d3ee] rounded-full"
           animate={{
             x: [0, 30, 0],
             opacity: [0.5, 1, 0.5],

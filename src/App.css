@@ -44,42 +44,42 @@
 :root {
   --radius: 0.75rem;
 
-  /* IDEV Professional Brand Colors - Enhanced */
-  --background: #0d4f5c;
+  /* IDEV Professional Brand Colors - Previous Theme */
+  --background: #0a1628;
   --foreground: #ffffff;
-  --card: #1a2332;
+  --card: #1e293b;
   --card-foreground: #ffffff;
-  --popover: #1a2332;
+  --popover: #1e293b;
   --popover-foreground: #ffffff;
-  --primary: #6dd5ed;
-  --primary-foreground: #0d4f5c;
+  --primary: #22d3ee;
+  --primary-foreground: #0a1628;
   --secondary: #2a3441;
   --secondary-foreground: #ffffff;
   --muted: #2a3441;
   --muted-foreground: #94a3b8;
-  --accent: #6dd5ed;
-  --accent-foreground: #0d4f5c;
+  --accent: #22d3ee;
+  --accent-foreground: #0a1628;
   --destructive: #ef4444;
   --border: #2a3441;
   --input: #2a3441;
-  --ring: #6dd5ed;
+  --ring: #22d3ee;
 
   /* Enhanced Chart Colors */
-  --chart-1: #6dd5ed;
-  --chart-2: #5bc5de;
-  --chart-3: #4ab5cf;
-  --chart-4: #39a5c0;
-  --chart-5: #2895b1;
+  --chart-1: #22d3ee;
+  --chart-2: #06b6d4;
+  --chart-3: #0891b2;
+  --chart-4: #0e7490;
+  --chart-5: #155e75;
 
   /* Sidebar Colors */
-  --sidebar: #1a2332;
+  --sidebar: #1e293b;
   --sidebar-foreground: #ffffff;
-  --sidebar-primary: #6dd5ed;
-  --sidebar-primary-foreground: #0d4f5c;
+  --sidebar-primary: #22d3ee;
+  --sidebar-primary-foreground: #0a1628;
   --sidebar-accent: #2a3441;
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #2a3441;
-  --sidebar-ring: #6dd5ed;
+  --sidebar-ring: #22d3ee;
 
   /* Professional Status Colors */
   --success: #10b981;
@@ -113,37 +113,37 @@
 }
 
 .dark {
-  --background: #0d4f5c;
+  --background: #0a1628;
   --foreground: #ffffff;
-  --card: #1a2332;
+  --card: #1e293b;
   --card-foreground: #ffffff;
-  --popover: #1a2332;
+  --popover: #1e293b;
   --popover-foreground: #ffffff;
-  --primary: #6dd5ed;
-  --primary-foreground: #0d4f5c;
+  --primary: #22d3ee;
+  --primary-foreground: #0a1628;
   --secondary: #2a3441;
   --secondary-foreground: #ffffff;
   --muted: #2a3441;
   --muted-foreground: #94a3b8;
-  --accent: #6dd5ed;
-  --accent-foreground: #0d4f5c;
+  --accent: #22d3ee;
+  --accent-foreground: #0a1628;
   --destructive: #ef4444;
   --border: #2a3441;
   --input: #2a3441;
-  --ring: #6dd5ed;
-  --chart-1: #6dd5ed;
-  --chart-2: #5bc5de;
-  --chart-3: #4ab5cf;
-  --chart-4: #39a5c0;
-  --chart-5: #2895b1;
-  --sidebar: #1a2332;
+  --ring: #22d3ee;
+  --chart-1: #22d3ee;
+  --chart-2: #06b6d4;
+  --chart-3: #0891b2;
+  --chart-4: #0e7490;
+  --chart-5: #155e75;
+  --sidebar: #1e293b;
   --sidebar-foreground: #ffffff;
-  --sidebar-primary: #6dd5ed;
-  --sidebar-primary-foreground: #0d4f5c;
+  --sidebar-primary: #22d3ee;
+  --sidebar-primary-foreground: #0a1628;
   --sidebar-accent: #2a3441;
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #2a3441;
-  --sidebar-ring: #6dd5ed;
+  --sidebar-ring: #22d3ee;
 }
 
 /* Enhanced Professional Styling */
@@ -181,10 +181,10 @@
 .starry-bg {
   background: linear-gradient(
     135deg,
-    #0d4f5c 0%,
-    #1a4d5a 30%,
-    #2a5a67 70%,
-    #0d4f5c 100%
+    #0a1628 0%,
+    #1a2332 30%,
+    #2a3441 70%,
+    #0a1628 100%
   );
   position: relative;
   overflow: hidden;
@@ -198,12 +198,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(2px 2px at 20px 30px, #6dd5ed, transparent),
-    radial-gradient(2px 2px at 40px 70px, #5bc5de, transparent),
-    radial-gradient(1px 1px at 90px 40px, #6dd5ed, transparent),
-    radial-gradient(1px 1px at 130px 80px, #4ab5cf, transparent),
-    radial-gradient(2px 2px at 160px 30px, #6dd5ed, transparent),
-    radial-gradient(1px 1px at 200px 50px, #5bc5de, transparent);
+  background-image: radial-gradient(2px 2px at 20px 30px, #22d3ee, transparent),
+    radial-gradient(2px 2px at 40px 70px, #06b6d4, transparent),
+    radial-gradient(1px 1px at 90px 40px, #22d3ee, transparent),
+    radial-gradient(1px 1px at 130px 80px, #0891b2, transparent),
+    radial-gradient(2px 2px at 160px 30px, #22d3ee, transparent),
+    radial-gradient(1px 1px at 200px 50px, #06b6d4, transparent);
   background-repeat: repeat;
   background-size: 300px 150px;
   animation: sparkle 25s linear infinite;
@@ -221,7 +221,7 @@
   background: radial-gradient(
     ellipse at center,
     transparent 0%,
-    rgba(13, 79, 92, 0.1) 100%
+    rgba(10, 22, 40, 0.1) 100%
   );
   z-index: 1;
 }
@@ -251,15 +251,15 @@
 
 /* IDEV Logo Enhanced Glow Effect */
 .idev-logo {
-  filter: drop-shadow(0 0 20px rgba(109, 213, 237, 0.6));
+  filter: drop-shadow(0 0 20px rgba(34, 211, 238, 0.6));
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 2px solid rgba(109, 213, 237, 0.3);
+  border: 2px solid rgba(34, 211, 238, 0.3);
 }
 
 .idev-logo:hover {
-  filter: drop-shadow(0 0 35px rgba(109, 213, 237, 0.9));
+  filter: drop-shadow(0 0 35px rgba(34, 211, 238, 0.9));
   transform: scale(1.08) rotate(2deg);
-  border-color: rgba(109, 213, 237, 0.6);
+  border-color: rgba(34, 211, 238, 0.6);
 }
 
 /* Sidebar Responsive Styles */
@@ -363,23 +363,23 @@
 
 /* Enhanced Button Styles */
 .btn-primary {
-  background: linear-gradient(135deg, #6dd5ed 0%, #5bc5de 100%);
+  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
   border: none;
-  color: #0d4f5c;
+  color: #0a1628;
   font-weight: 600;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
+  box-shadow: 0 4px 15px rgba(34, 211, 238, 0.3);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #5bc5de 0%, #4ab5cf 100%);
-  box-shadow: 0 6px 25px rgba(109, 213, 237, 0.5);
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  box-shadow: 0 6px 25px rgba(34, 211, 238, 0.5);
   transform: translateY(-2px);
 }
 
 .btn-secondary {
   background: rgba(42, 52, 65, 0.8);
-  border: 1px solid rgba(109, 213, 237, 0.3);
+  border: 1px solid rgba(34, 211, 238, 0.3);
   color: #ffffff;
   backdrop-filter: blur(10px);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -387,8 +387,8 @@
 
 .btn-secondary:hover {
   background: rgba(42, 52, 65, 1);
-  border-color: rgba(109, 213, 237, 0.6);
-  box-shadow: 0 4px 20px rgba(109, 213, 237, 0.2);
+  border-color: rgba(34, 211, 238, 0.6);
+  box-shadow: 0 4px 20px rgba(34, 211, 238, 0.2);
 }
 
 /* Professional Status Indicators */
@@ -487,28 +487,28 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a2332;
+  background: #1e293b;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #6dd5ed 0%, #5bc5de 100%);
+  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
   border-radius: 5px;
-  border: 2px solid #1a2332;
+  border: 2px solid #1e293b;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #5bc5de 0%, #4ab5cf 100%);
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
 }
 
 ::-webkit-scrollbar-corner {
-  background: #1a2332;
+  background: #1e293b;
 }
 
 /* Professional Form Inputs */
 .form-input {
   background: rgba(42, 52, 65, 0.8);
-  border: 1px solid rgba(109, 213, 237, 0.3);
+  border: 1px solid rgba(34, 211, 238, 0.3);
   color: #ffffff;
   padding: 0.75rem 1rem;
   border-radius: var(--radius);
@@ -517,8 +517,8 @@
 }
 
 .form-input:focus {
-  border-color: #6dd5ed;
-  box-shadow: 0 0 0 3px rgba(109, 213, 237, 0.1);
+  border-color: #22d3ee;
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.1);
   background: rgba(42, 52, 65, 1);
 }
 
