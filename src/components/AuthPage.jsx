@@ -39,9 +39,9 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
       title: t("manager"),
       description: t("manager_desc"),
       icon: Building,
-      color: "bg-purple-500 hover:bg-purple-600",
-      bgColor: "bg-purple-50 dark:bg-purple-950",
-      borderColor: "border-purple-200 dark:border-purple-800"
+      color: "bg-teal-500 hover:bg-teal-600",
+      bgColor: "bg-teal-50 dark:bg-teal-950",
+      borderColor: "border-teal-200 dark:border-teal-800"
     },
     {
       id: "driver",
@@ -105,28 +105,36 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
   // إذا لم يتم اختيار نوع المستخدم، عرض صفحة اختيار الأيقونات
   if (!selectedUserType) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#0d4f5c] via-[#1a4d5a] to-[#2a5a67] flex items-center justify-center p-4">
-        {/* Background Animation */}
+      <div className="min-h-screen bg-gradient-to-br from-[#0a1628] via-[#0d2137] to-[#0a1628] flex items-center justify-center p-4 relative">
+        {/* Enhanced gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-blue-500/10 animate-pulse" style={{ animationDuration: '6s' }}></div>
+        {/* Enhanced Background Animation */}
         <div className="absolute inset-0 overflow-hidden">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-white/20 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                opacity: [0.2, 0.8, 0.2],
-                scale: [0.5, 1.5, 0.5],
-              }}
-              transition={{
-                duration: 3 + Math.random() * 2,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
+          {[...Array(50)].map((_, i) => {
+            const size = Math.random() > 0.7 ? 'w-2 h-2' : 'w-1 h-1';
+            const color = Math.random() > 0.5 ? 'bg-cyan-400/40' : 'bg-white/30';
+            return (
+              <motion.div
+                key={i}
+                className={`absolute ${size} ${color} rounded-full blur-sm`}
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  opacity: [0.3, 1, 0.3],
+                  scale: [0.8, 2, 0.8],
+                  y: [0, -20, 0],
+                }}
+                transition={{
+                  duration: 4 + Math.random() * 3,
+                  repeat: Infinity,
+                  delay: Math.random() * 3,
+                  ease: "easeInOut",
+                }}
+              />
+            );
+          })}
         </div>
 
         <motion.div
@@ -142,7 +150,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
             transition={{ delay: 0.2, duration: 0.8 }}
             className="text-center mb-12"
           >
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-white bg-clip-text text-transparent mb-4">
+            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-cyan-300 via-blue-300 to-white bg-clip-text text-transparent mb-4 drop-shadow-2xl" style={{ textShadow: '0 0 40px rgba(6, 182, 212, 0.3)' }}>
               {t("choose_account")}
             </h1>
           </motion.div>
@@ -162,11 +170,11 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Card
-                    className={`transition-all duration-300 hover:shadow-2xl ${type.color.split(' ')[0]}/20 hover:${type.color.split(' ')[0]}/30 backdrop-blur-lg border-2 ${type.borderColor} overflow-hidden group`}
+                    className="transition-all duration-300 hover:shadow-2xl bg-white/10 hover:bg-white/15 backdrop-blur-xl border-2 border-white/20 hover:border-white/40 overflow-hidden group cursor-pointer"
                   >
                     <CardContent className="p-6 text-center relative">
-                      {/* تأثير التدرج */}
-                      <div className={`absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity bg-gradient-to-br ${type.color.split(' ')[0]}`}></div>
+                      {/* Enhanced gradient effect */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       
                       {/* الأيقونة */}
                       <motion.div
@@ -181,10 +189,11 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
                       
                       {/* النص */}
                       <div className="relative z-10">
-                        <h3 className="text-lg font-bold text-gray-800 mb-2">{type.title}</h3>
-                        <p className="text-gray-600 text-xs mb-2">{type.description}</p>
-                        <div className="text-xs text-blue-600 mb-3 font-medium">
-                          🌐 تسجيل جديد أو تسجيل دخول عبر Internet Identity
+                        <h3 className="text-xl font-bold text-white mb-2 drop-shadow-md">{type.title}</h3>
+                        <p className="text-white/80 text-sm mb-3">{type.description}</p>
+                        <div className="text-sm text-cyan-300 mb-4 font-medium flex items-center justify-center gap-2">
+                          <Globe className="w-4 h-4" />
+                          <span>{t("internet_identity_auth") || "Internet Identity"}</span>
                         </div>
                         
                         {/* زر المصادقة عبر Internet Identity */}
@@ -238,7 +247,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
               <Button
                 variant="outline"
                 onClick={onBackToWelcome}
-                className="relative bg-gradient-to-r from-rose-500/20 to-pink-500/20 hover:from-rose-500/30 hover:to-pink-500/30 backdrop-blur-lg border-2 border-rose-400/40 hover:border-rose-400/60 text-white hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 overflow-hidden group"
+                className="relative bg-white/10 hover:bg-white/20 backdrop-blur-lg border-2 border-white/30 hover:border-white/50 text-white hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 overflow-hidden group"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                 <span className="relative z-10">
@@ -257,30 +266,39 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
     const selectedType = userTypes.find(type => type.id === selectedUserType);
     const colorClass = selectedType?.color?.split(' ')[0] || 'bg-blue-500';
     const borderColorClass = selectedType?.borderColor || 'border-blue-200';
-    
+
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#0d4f5c] via-[#1a4d5a] to-[#2a5a67] flex items-center justify-center p-4">
-        {/* Background Animation */}
+      <div className="min-h-screen bg-gradient-to-br from-[#0a1628] via-[#0d2137] to-[#0a1628] flex items-center justify-center p-4 relative">
+        {/* Enhanced gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-blue-500/10 animate-pulse" style={{ animationDuration: '6s' }}></div>
+
+        {/* Enhanced Background Animation */}
         <div className="absolute inset-0 overflow-hidden">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-white/20 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                opacity: [0.2, 0.8, 0.2],
-                scale: [0.5, 1.5, 0.5],
-              }}
-              transition={{
-                duration: 3 + Math.random() * 2,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
+          {[...Array(50)].map((_, i) => {
+            const size = Math.random() > 0.7 ? 'w-2 h-2' : 'w-1 h-1';
+            const color = Math.random() > 0.5 ? 'bg-cyan-400/40' : 'bg-white/30';
+            return (
+              <motion.div
+                key={i}
+                className={`absolute ${size} ${color} rounded-full blur-sm`}
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  opacity: [0.3, 1, 0.3],
+                  scale: [0.8, 2, 0.8],
+                  y: [0, -20, 0],
+                }}
+                transition={{
+                  duration: 4 + Math.random() * 3,
+                  repeat: Infinity,
+                  delay: Math.random() * 3,
+                  ease: "easeInOut",
+                }}
+              />
+            );
+          })}
         </div>
 
         <motion.div
@@ -289,16 +307,16 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
           transition={{ duration: 0.6 }}
           className="relative z-10 w-full max-w-lg mx-auto"
         >
-          <Card className={`${colorClass}/10 backdrop-blur-lg shadow-2xl border-2 ${borderColorClass} relative overflow-hidden group`}>
-            {/* تأثير التدرج للخلفية */}
-            <div className={`absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity bg-gradient-to-br ${colorClass}`}></div>
+          <Card className="bg-white/10 backdrop-blur-xl shadow-2xl border-2 border-white/20 relative overflow-hidden group">
+            {/* Enhanced gradient background effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-transparent opacity-50"></div>
             
             {/* أزرار العودة */}
             <div className="p-4 border-b border-white/20 flex justify-between items-center relative z-10">
               <Button
                 variant="ghost"
                 onClick={() => setSelectedUserType("")}
-                className={`relative ${colorClass}/20 hover:${colorClass}/30 backdrop-blur-lg border ${borderColorClass} hover:border-opacity-80 text-white hover:text-white transition-all duration-300 transform hover:scale-105 overflow-hidden group rounded-lg`}
+                className="relative bg-white/10 hover:bg-white/20 backdrop-blur-lg border border-white/30 hover:border-white/50 text-white hover:text-white transition-all duration-300 transform hover:scale-105 overflow-hidden group rounded-lg"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-600"></div>
                 <span className="relative z-10">
@@ -309,7 +327,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
                 <Button
                   variant="ghost"
                   onClick={onBackToWelcome}
-                  className="relative bg-rose-500/20 hover:bg-rose-500/30 backdrop-blur-lg border border-rose-400/40 hover:border-rose-400/60 text-white hover:text-white transition-all duration-300 transform hover:scale-105 overflow-hidden group rounded-lg text-sm"
+                  className="relative bg-white/10 hover:bg-white/20 backdrop-blur-lg border border-white/30 hover:border-white/50 text-white hover:text-white transition-all duration-300 transform hover:scale-105 overflow-hidden group rounded-lg text-sm"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-650"></div>
                   <span className="relative z-10">
@@ -356,7 +374,7 @@ const AuthPage = ({ onAuthSuccess, onBackToWelcome }) => {
                       <span>لا حاجة لكلمة مرور</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-purple-400">✓</span>
+                      <span className="text-teal-400">✓</span>
                       <span>حماية الخصوصية</span>
                     </div>
                     <div className="flex items-center gap-2">
