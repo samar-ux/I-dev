@@ -51,7 +51,37 @@ const WelcomeAnimation = ({ onComplete }) => {
   if (!showWelcome) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-[#0a1628] overflow-hidden">
+    <div className="fixed inset-0 z-50 bg-gradient-to-br from-[#0a1628] via-[#0d1b33] to-[#0a1628] overflow-hidden">
+      {/* Animated gradient overlay */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-blue-500/10"
+        animate={{
+          opacity: [0.3, 0.6, 0.3],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      {/* Radial gradient pulse */}
+      <motion.div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
+        style={{
+          background: "radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%)",
+        }}
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.5, 0.8, 0.5],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
       {/* Language Selection Ball - Top Right */}
       <div className="absolute top-6 right-6 z-60">
         {/* Main Language Ball */}
@@ -79,13 +109,13 @@ const WelcomeAnimation = ({ onComplete }) => {
           >
             {/* Shimmer effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-            
+
             {/* Inner glow */}
             <div className="absolute inset-2 rounded-full bg-gradient-to-br from-white/20 to-transparent"></div>
-            
+
             {/* Icon with enhanced styling */}
             <Languages className="w-9 h-9 text-white relative z-10 drop-shadow-lg" />
-            
+
             {/* Pulsing ring */}
             <motion.div
               className="absolute inset-0 rounded-full border-2 border-white/30"
@@ -119,7 +149,7 @@ const WelcomeAnimation = ({ onComplete }) => {
                     initial={{ x: 50, opacity: 0, scale: 0 }}
                     animate={{ x: 0, opacity: 1, scale: 1 }}
                     exit={{ x: 50, opacity: 0, scale: 0 }}
-                    transition={{ 
+                    transition={{
                       delay: index * 0.1,
                       duration: 0.4,
                       type: "spring",
@@ -130,12 +160,12 @@ const WelcomeAnimation = ({ onComplete }) => {
                   >
                     {/* Shimmer effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                    
+
                     {/* Inner glow */}
                     <div className="absolute inset-1 rounded-full bg-gradient-to-br from-white/10 to-transparent"></div>
-                    
+
                     <span className="text-xl relative z-10 drop-shadow-md">{lang.flag}</span>
-                    
+
                     {/* Pulsing effect */}
                     <motion.div
                       className="absolute inset-0 rounded-full border border-white/20"
@@ -159,35 +189,91 @@ const WelcomeAnimation = ({ onComplete }) => {
 
       {/* Main Content */}
       <div className="h-full flex items-center justify-center relative">
-        {/* Background Stars */}
+        {/* Background Stars (NO MOVEMENT) */}
         <div className="absolute inset-0">
-          {[...Array(50)].map((_, i) => (
+          {[...Array(80)].map((_, i) => (
             <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-white rounded-full opacity-60"
+              key={`star-${i}`}
+              className={`absolute ${Math.random() > 0.7 ? "w-1.5 h-1.5" : "w-1 h-1"} ${Math.random() > 0.5 ? "bg-cyan-300" : "bg-white"} rounded-full`}
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
+                filter: "blur(0.5px)",
               }}
               animate={{
-                opacity: [0.3, 1, 0.3],
+                opacity: [0, 1, 0],
                 scale: [0.5, 1.2, 0.5],
               }}
               transition={{
                 duration: 2 + Math.random() * 3,
                 repeat: Infinity,
-                delay: Math.random() * 2,
+                delay: Math.random() * 5,
+                ease: "easeInOut",
               }}
             />
           ))}
         </div>
 
-        {/* Floating geometric shapes */}
+        {/* Light Particles (NO MOVEMENT) */}
+        <div className="absolute inset-0">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={`particle-${i}`}
+              className="absolute w-2 h-2 bg-cyan-400/40 rounded-full blur-sm"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                opacity: [0, 0.8, 0],
+                scale: [0, 1.5, 0],
+              }}
+              transition={{
+                duration: 3 + Math.random() * 4,
+                repeat: Infinity,
+                delay: Math.random() * 6,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Enhanced Floating geometric shapes */}
         <motion.div
-          className="absolute top-20 left-20 w-4 h-4 border-2 border-[#22d3ee] rounded-full"
+          className="absolute top-20 left-20 w-6 h-6 border-2 border-cyan-400/60 rounded-full shadow-lg shadow-cyan-400/30"
           animate={{
-            y: [0, -20, 0],
+            y: [0, -30, 0],
             rotate: [0, 180, 360],
+            scale: [1, 1.15, 1],
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        <motion.div
+          className="absolute top-40 right-32 w-8 h-8 border-2 border-blue-400/60 shadow-lg shadow-blue-400/30"
+          animate={{
+            rotate: [0, 90, 180, 270, 360],
+            scale: [1, 1.3, 1],
+            borderRadius: ['25%', '50%', '25%'],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        <motion.div
+          className="absolute bottom-32 left-40 w-5 h-5 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full shadow-xl shadow-cyan-400/50"
+          animate={{
+            x: [0, 40, 0],
+            y: [0, -20, 0],
+            opacity: [0.6, 1, 0.6],
+            scale: [1, 1.4, 1],
           }}
           transition={{
             duration: 6,
@@ -197,26 +283,27 @@ const WelcomeAnimation = ({ onComplete }) => {
         />
 
         <motion.div
-          className="absolute top-40 right-32 w-6 h-6 border-2 border-[#06b6d4]"
+          className="absolute top-1/3 right-1/4 w-4 h-4 border-2 border-teal-400/60"
           animate={{
-            rotate: [0, 45, 0],
+            rotate: [45, 225, 45],
             scale: [1, 1.2, 1],
+            x: [0, 20, 0],
           }}
           transition={{
-            duration: 4,
+            duration: 5,
             repeat: Infinity,
             ease: "easeInOut",
           }}
         />
 
         <motion.div
-          className="absolute bottom-32 left-40 w-3 h-3 bg-[#22d3ee] rounded-full"
+          className="absolute bottom-1/4 right-1/3 w-3 h-3 bg-cyan-300/50 rounded-full blur-sm"
           animate={{
-            x: [0, 30, 0],
-            opacity: [0.5, 1, 0.5],
+            y: [0, -25, 0],
+            opacity: [0.4, 1, 0.4],
           }}
           transition={{
-            duration: 5,
+            duration: 4,
             repeat: Infinity,
             ease: "easeInOut",
           }}
@@ -261,7 +348,7 @@ const WelcomeAnimation = ({ onComplete }) => {
                 <motion.img
                   key="mrdev"
                   initial={{ opacity: !showLogo ? 1 : 0 }}
-                  animate={{ 
+                  animate={{
                     opacity: !showLogo ? 1 : 0,
                     rotateY: !showLogo ? 0 : 180,
                     boxShadow: [
@@ -279,11 +366,11 @@ const WelcomeAnimation = ({ onComplete }) => {
                   alt="Mr. Dev"
                   className="absolute inset-0 w-full h-full rounded-full object-cover"
                 />
-                
+
                 <motion.img
                   key="logo"
                   initial={{ opacity: showLogo ? 1 : 0 }}
-                  animate={{ 
+                  animate={{
                     opacity: showLogo ? 1 : 0,
                     rotateY: showLogo ? 0 : -180,
                     boxShadow: [
@@ -329,44 +416,76 @@ const WelcomeAnimation = ({ onComplete }) => {
             </motion.div>
 
             <motion.div
-              className="absolute top-1/2 left-0 w-6 h-6 bg-purple-400 rounded-full flex items-center justify-center"
+              className="absolute top-1/2 left-0 w-6 h-6 bg-teal-400 rounded-full flex items-center justify-center"
               animate={{
                 rotate: [0, 360],
                 scale: [1, 1.3, 1],
               }}
               transition={{ duration: 5, repeat: Infinity }}
             >
-              <Globe className="h-3 w-3 text-purple-900" />
+              <Globe className="h-3 w-3 text-teal-900" />
             </motion.div>
           </motion.div>
 
-          {/* Main Text */}
-          <motion.h1
-            key={currentText}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-white bg-clip-text text-transparent mb-4 leading-tight"
-          >
+          {/* Enhanced Main Text with better animations */}
+          <div className="relative mb-6 flex items-center justify-center min-h-[160px] md:min-h-[180px]">
             <AnimatePresence mode="wait">
-              <motion.span
+              <motion.h1
                 key={currentText}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.6 }}
+                initial={{
+                  opacity: 0,
+                  y: 50,
+                  scale: 0.9,
+                  filter: "blur(10px)"
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  filter: "blur(0px)"
+                }}
+                exit={{
+                  opacity: 0,
+                  y: -50,
+                  scale: 1.1,
+                  filter: "blur(10px)"
+                }}
+                transition={{
+                  duration: 0.8,
+                  ease: [0.43, 0.13, 0.23, 0.96]
+                }}
+                className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-white bg-clip-text text-transparent leading-tight"
+                style={{
+                  textShadow: '0 0 40px rgba(6, 182, 212, 0.3)',
+                }}
               >
                 {texts[currentText]}
-              </motion.span>
+              </motion.h1>
             </AnimatePresence>
-          </motion.h1>
+
+            {/* Text glow effect */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 via-blue-400/20 to-transparent blur-3xl -z-10"
+              animate={{
+                opacity: [0.3, 0.6, 0.3],
+                scale: [0.95, 1.05, 0.95],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </div>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
-            className="text-base bg-gradient-to-r from-cyan-300 to-white bg-clip-text text-transparent mb-3 max-w-2xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20, filter: "blur(5px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ delay: 0.3, duration: 1, ease: "easeOut" }}
+            className="text-lg md:text-2xl font-light bg-gradient-to-r from-cyan-300 via-blue-300 to-white bg-clip-text text-transparent mb-8 max-w-3xl mx-auto leading-relaxed"
+            style={{
+              textShadow: '0 0 30px rgba(34, 211, 238, 0.2)',
+            }}
           >
             {t("welcome_subtitle")}
           </motion.p>
@@ -376,18 +495,18 @@ const WelcomeAnimation = ({ onComplete }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.8 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-white/80 mb-4 max-w-xl mx-auto"
+            className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm text-white mb-6 max-w-3xl mx-auto"
           >
-            <div className="flex items-center justify-center gap-1 bg-white/10 backdrop-blur-sm rounded-lg py-1 px-2">
+            <div className="flex items-center justify-center gap-2 bg-white/15 backdrop-blur-md rounded-lg py-2 px-3 border border-white/20 hover:bg-white/20 transition-all duration-300">
               🔗 {t("blockchain_tech")}
             </div>
-            <div className="flex items-center justify-center gap-1 bg-white/10 backdrop-blur-sm rounded-lg py-1 px-2">
+            <div className="flex items-center justify-center gap-2 bg-white/15 backdrop-blur-md rounded-lg py-2 px-3 border border-white/20 hover:bg-white/20 transition-all duration-300">
               🌐 {t("web3_tech")}
             </div>
-            <div className="flex items-center justify-center gap-1 bg-white/10 backdrop-blur-sm rounded-lg py-1 px-2">
+            <div className="flex items-center justify-center gap-2 bg-white/15 backdrop-blur-md rounded-lg py-2 px-3 border border-white/20 hover:bg-white/20 transition-all duration-300">
               ⚡ {t("icp_protocol")}
             </div>
-            <div className="flex items-center justify-center gap-1 bg-white/10 backdrop-blur-sm rounded-lg py-1 px-2">
+            <div className="flex items-center justify-center gap-2 bg-white/15 backdrop-blur-md rounded-lg py-2 px-3 border border-white/20 hover:bg-white/20 transition-all duration-300">
               🚚 {t("smart_logistics")}
             </div>
           </motion.div>
@@ -397,16 +516,15 @@ const WelcomeAnimation = ({ onComplete }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9 }}
-            className="flex justify-center space-x-2 space-x-reverse mb-4"
+            className="flex justify-center gap-3 mb-6"
           >
             {texts.map((_, index) => (
               <motion.div
                 key={index}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  currentText === index
-                    ? "bg-cyan-400 scale-125"
-                    : "bg-gray-600"
-                }`}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${currentText === index
+                  ? "bg-cyan-400 shadow-lg shadow-cyan-400/50"
+                  : "bg-gray-500/50"
+                  }`}
                 animate={{
                   scale: currentText === index ? 1.25 : 1,
                   backgroundColor:
@@ -426,12 +544,12 @@ const WelcomeAnimation = ({ onComplete }) => {
               setShowWelcome(false);
               onComplete();
             }}
-            className="relative bg-white/10 hover:bg-white/20 backdrop-blur-lg border border-white/30 hover:border-white/50 text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 overflow-hidden group"
+            className="relative bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 backdrop-blur-lg border-2 border-white/30 hover:border-white/60 text-white px-8 py-3 rounded-full text-base font-semibold transition-all duration-300 shadow-2xl shadow-cyan-500/30 hover:shadow-cyan-500/50 transform hover:scale-105 overflow-hidden group"
             data-testid="button-start-journey"
           >
             {/* Shiny effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-            
+
             <span className="relative z-10">{t("start_journey")}</span>
           </motion.button>
         </div>
