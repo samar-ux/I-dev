@@ -72,12 +72,6 @@ const Layout = ({ children, currentView, onViewChange, user, onLogout }) => {
       color: "bg-indigo-500",
     },
     {
-      id: "profile",
-      label: t("profile"),
-      icon: UserCircle,
-      color: "bg-pink-500",
-    },
-    {
       id: "settings",
       label: t("settings"),
       icon: Settings,
@@ -103,6 +97,10 @@ const Layout = ({ children, currentView, onViewChange, user, onLogout }) => {
   };
 
   const handleNavigation = (itemId) => {
+    if (itemId === "profile") {
+      // لا نفعل شيئاً هنا لأن البروفايل يتم التعامل معه من الهيدر
+      return;
+    }
     onViewChange(itemId);
     if (isMobile) {
       setSidebarOpen(false);
@@ -173,7 +171,10 @@ const Layout = ({ children, currentView, onViewChange, user, onLogout }) => {
                 const UserIcon = userTypeInfo.icon;
                 return (
                   <div className="relative group">
-                    <div className={`w-10 h-10 ${userTypeInfo.color} rounded-full flex items-center justify-center border-2 border-white/20 hover:border-white/40 transition-all duration-300 cursor-pointer group-hover:scale-110 group-hover:shadow-lg`}>
+                    <div 
+                      className={`w-10 h-10 ${userTypeInfo.color} rounded-full flex items-center justify-center border-2 border-white/20 hover:border-white/40 transition-all duration-300 cursor-pointer group-hover:scale-110 group-hover:shadow-lg`}
+                      onClick={() => onViewChange("profile")}
+                    >
                       <UserIcon className="w-5 h-5 text-white group-hover:rotateY-180 transition-transform duration-600" />
                   </div>
                     {/* تأثير الهالة */}

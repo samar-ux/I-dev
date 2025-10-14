@@ -121,7 +121,47 @@ const UserProfile = ({ user, onClose, onEdit }) => {
     }
   };
 
-  const UserTypeIcon = getUserTypeIcon(user.userType);
+  const getUserTypeColor = (userType) => {
+    switch(userType) {
+      case 'store_owner':
+        return {
+          gradient: 'from-green-500 via-green-600 to-green-700',
+          bg: 'bg-green-500',
+          text: 'text-green-500',
+          border: 'border-green-500'
+        };
+      case 'customer':
+        return {
+          gradient: 'from-blue-500 via-blue-600 to-blue-700',
+          bg: 'bg-blue-500',
+          text: 'text-blue-500',
+          border: 'border-blue-500'
+        };
+      case 'company':
+        return {
+          gradient: 'from-purple-500 via-purple-600 to-purple-700',
+          bg: 'bg-purple-500',
+          text: 'text-purple-500',
+          border: 'border-purple-500'
+        };
+      case 'driver':
+        return {
+          gradient: 'from-orange-500 via-orange-600 to-orange-700',
+          bg: 'bg-orange-500',
+          text: 'text-orange-500',
+          border: 'border-orange-500'
+        };
+      default:
+        return {
+          gradient: 'from-gray-500 via-gray-600 to-gray-700',
+          bg: 'bg-gray-500',
+          text: 'text-gray-500',
+          border: 'border-gray-500'
+        };
+    }
+  };
+
+  const userColors = getUserTypeColor(user.userType);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={onClose}>
@@ -131,7 +171,7 @@ const UserProfile = ({ user, onClose, onEdit }) => {
         dir={language === 'ar' ? 'rtl' : 'ltr'}
       >
         {/* Header */}
-        <div className="relative bg-gradient-to-br from-blue-600 via-cyan-600 to-blue-800 rounded-t-3xl p-8 text-white">
+        <div className={`relative bg-gradient-to-br ${userColors.gradient} rounded-t-3xl p-8 text-white`}>
           <button
             onClick={onClose}
             className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors"
@@ -179,7 +219,7 @@ const UserProfile = ({ user, onClose, onEdit }) => {
                 <Download className="w-4 h-4" />
                 تحميل السيرة
               </Button>
-              <Button className="bg-cyan-500 hover:bg-cyan-600 px-6 py-2 rounded-full flex items-center gap-2 transition-colors text-white border-0">
+              <Button className={`${userColors.bg} hover:opacity-90 px-6 py-2 rounded-full flex items-center gap-2 transition-colors text-white border-0`}>
                 <MessageSquare className="w-4 h-4" />
                 تواصل معي
               </Button>
