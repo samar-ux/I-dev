@@ -2,6 +2,7 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { Progress } from "./ui/progress";
+import Footer from "./Footer";
 import {
   Package,
   Truck,
@@ -50,7 +51,7 @@ const HomePage = ({ onViewChange }) => {
       id: "tracking",
       label: t("track_shipments_label"),
       icon: Package,
-      color: "bg-purple-500",
+      color: "bg-cyan-500",
       description: t("track_shipments_desc"),
     },
     {
@@ -93,7 +94,6 @@ const HomePage = ({ onViewChange }) => {
     },
   ];
 
-  // Get current time without hooks
   const getCurrentTime = () => {
     const now = new Date();
     return {
@@ -118,160 +118,121 @@ const HomePage = ({ onViewChange }) => {
   const currentTime = getCurrentTime();
 
   return (
-    <div className="space-y-6 pb-20 md:pb-6">
+    <div className="space-y-4 pb-16 md:pb-6">
       {/* Welcome Section - Enhanced for mobile */}
-      <div className="glass-card-hero p-4 md:p-6 text-center animate-fade-in-up">
-        <div className="space-y-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="glass-card-hero p-4 md:p-6 rounded-xl border border-white/10 backdrop-blur-xl bg-gradient-to-br from-cyan-500/10 via-blue-500/5 to-transparent animate-fade-in-up shadow-md">
+        <div className="space-y-3">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-3">
             <div className="text-center md:text-right">
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold gradient-text arabic-text">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-300 bg-clip-text text-transparent arabic-text drop-shadow-md">
                 {t("welcome_title")}
               </h1>
-              <p className="text-sm md:text-base text-muted-foreground arabic-text mt-2">
+              <p className="text-xs md:text-sm text-muted-foreground arabic-text mt-1">
                 {t("welcome_subtitle")}
               </p>
             </div>
             <div className="text-center">
-              <div className="text-lg md:text-xl font-bold text-primary arabic-text">
+              <div className="text-base md:text-lg font-bold text-primary arabic-text">
                 {currentTime.time}
               </div>
-              <div className="text-sm text-muted-foreground arabic-text">
+              <div className="text-xs text-muted-foreground arabic-text">
                 {currentTime.date}
               </div>
             </div>
           </div>
         </div>
       </div>
-      {/* Statistics Cards - Responsive Grid */}
-      {/* {stats.map((stat, index) => {
-          const Icon = stat.icon;
-          return (
-            <Card
-              key={index}
-              className="glass-card hover:scale-105 transition-all duration-300 animate-fade-in-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <CardContent className="p-4 md:p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-xs md:text-sm font-medium text-muted-foreground arabic-text">
-                      {stat.title}
-                    </p>
-                    <p className="text-lg md:text-3xl font-bold text-foreground">
-                      {stat.value}
-                    </p>
-                    <div className="flex items-center mt-2">
-                      <TrendingUp className="h-3 w-3 md:h-4 md:w-4 text-green-400 ml-1" />
-                      <span className="text-xs md:text-sm font-medium text-green-400">
-                        {stat.change}
-                      </span>
-                      <span className="text-xs text-muted-foreground mr-2 arabic-text">
-                        من الشهر الماضي
-                      </span>
-                    </div>
-                  </div>
-                  <div className={`p-2 md:p-3 rounded-full ${stat.bgColor}`}>
-                    <Icon className={`h-4 w-4 md:h-6 md:w-6 ${stat.color}`} />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          );
-        })} */}
+
       {/* Stats Cards - Responsive Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
-        <Card className="glass-card animate-fade-in-up animation-delay-100">
-          <CardContent className="p-4 md:p-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        <Card className="glass-card animate-fade-in-up animation-delay-100 hover:shadow-md hover:scale-105 transition-all duration-300 border-cyan-500/20">
+          <CardContent className="p-3 md:p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs md:text-sm text-muted-foreground arabic-text">
+                <p className="text-xs text-muted-foreground arabic-text">
                   {t("total_shipments")}
                 </p>
-                <p className="text-lg md:text-2xl font-bold text-primary">
-                  123
-                </p>
+                <p className="text-base md:text-lg font-bold text-primary">123</p>
               </div>
-              <div className="bg-blue-500/20 p-2 md:p-3 rounded-full">
-                <Package className="h-4 w-4 md:h-6 md:w-6 text-blue-500" />
+              <div className="bg-blue-500/20 p-1 md:p-2 rounded-full">
+                <Package className="h-3 w-3 md:h-4 md:w-4 text-blue-500" />
               </div>
             </div>
-            <div className="flex items-center mt-2 text-xs md:text-sm">
-              <ArrowUp className="h-3 w-3 md:h-4 md:w-4 text-green-500 ml-1" />
+            <div className="flex items-center mt-1 text-xs">
+              <ArrowUp className="h-2 w-2 md:h-3 md:w-3 text-green-500 ml-1" />
               <span className="text-green-500">+12%</span>
-              <span className="text-muted-foreground mr-2 arabic-text">
+              <span className="text-muted-foreground mr-1 arabic-text">
                 {t("from_last_week")}
               </span>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="glass-card animate-fade-in-up animation-delay-200">
-          <CardContent className="p-4 md:p-6">
+        <Card className="glass-card animate-fade-in-up animation-delay-200 hover:shadow-md hover:scale-105 transition-all duration-300 border-orange-500/20">
+          <CardContent className="p-3 md:p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs md:text-sm text-muted-foreground arabic-text">
+                <p className="text-xs text-muted-foreground arabic-text">
                   {t("active_drivers")}
                 </p>
-                <p className="text-lg md:text-2xl font-bold text-primary">89</p>
+                <p className="text-base md:text-lg font-bold text-primary">89</p>
               </div>
-              <div className="bg-orange-500/20 p-2 md:p-3 rounded-full">
-                <Truck className="h-4 w-4 md:h-6 md:w-6 text-orange-500" />
+              <div className="bg-orange-500/20 p-1 md:p-2 rounded-full">
+                <Truck className="h-3 w-3 md:h-4 md:w-4 text-orange-500" />
               </div>
             </div>
-            <div className="flex items-center mt-2 text-xs md:text-sm">
-              <ArrowUp className="h-3 w-3 md:h-4 md:w-4 text-green-500 ml-1" />
+            <div className="flex items-center mt-1 text-xs">
+              <ArrowUp className="h-2 w-2 md:h-3 md:w-3 text-green-500 ml-1" />
               <span className="text-green-500">+5%</span>
-              <span className="text-muted-foreground mr-2 arabic-text">
+              <span className="text-muted-foreground mr-1 arabic-text">
                 {t("from_last_week")}
               </span>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="glass-card animate-fade-in-up animation-delay-300">
-          <CardContent className="p-4 md:p-6">
+        <Card className="glass-card animate-fade-in-up animation-delay-300 hover:shadow-md hover:scale-105 transition-all duration-300 border-green-500/20">
+          <CardContent className="p-3 md:p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs md:text-sm text-muted-foreground arabic-text">
+                <p className="text-xs text-muted-foreground arabic-text">
                   {t("registered_stores")}
                 </p>
-                <p className="text-lg md:text-2xl font-bold text-primary">
-                  156
-                </p>
+                <p className="text-base md:text-lg font-bold text-primary">156</p>
               </div>
-              <div className="bg-green-500/20 p-2 md:p-3 rounded-full">
-                <Store className="h-4 w-4 md:h-6 md:w-6 text-green-500" />
+              <div className="bg-green-500/20 p-1 md:p-2 rounded-full">
+                <Store className="h-3 w-3 md:h-4 md:w-4 text-green-500" />
               </div>
             </div>
-            <div className="flex items-center mt-2 text-xs md:text-sm">
-              <ArrowUp className="h-3 w-3 md:h-4 md:w-4 text-green-500 ml-1" />
+            <div className="flex items-center mt-1 text-xs">
+              <ArrowUp className="h-2 w-2 md:h-3 md:w-3 text-green-500 ml-1" />
               <span className="text-green-500">+8%</span>
-              <span className="text-muted-foreground mr-2 arabic-text">
+              <span className="text-muted-foreground mr-1 arabic-text">
                 {t("from_last_week")}
               </span>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="glass-card animate-fade-in-up animation-delay-400">
-          <CardContent className="p-4 md:p-6">
+        <Card className="glass-card animate-fade-in-up animation-delay-400 hover:shadow-md hover:scale-105 transition-all duration-300 border-teal-500/20">
+          <CardContent className="p-3 md:p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs md:text-sm text-muted-foreground arabic-text">
+                <p className="text-xs text-muted-foreground arabic-text">
                   {t("revenues")}
                 </p>
-                <p className="text-lg md:text-2xl font-bold text-primary">
+                <p className="text-base md:text-lg font-bold text-primary">
                   203 ر.س
                 </p>
               </div>
-              <div className="bg-purple-500/20 p-2 md:p-3 rounded-full">
-                <DollarSign className="h-4 w-4 md:h-6 md:w-6 text-purple-500" />
+              <div className="bg-teal-500/20 p-1 md:p-2 rounded-full">
+                <DollarSign className="h-3 w-3 md:h-4 md:w-4 text-teal-500" />
               </div>
             </div>
-            <div className="flex items-center mt-2 text-xs md:text-sm">
-              <ArrowUp className="h-3 w-3 md:h-4 md:w-4 text-green-500 ml-1" />
+            <div className="flex items-center mt-1 text-xs">
+              <ArrowUp className="h-2 w-2 md:h-3 md:w-3 text-green-500 ml-1" />
               <span className="text-green-500">+15%</span>
-              <span className="text-muted-foreground mr-2 arabic-text">
+              <span className="text-muted-foreground mr-1 arabic-text">
                 {t("from_last_week")}
               </span>
             </div>
@@ -281,10 +242,10 @@ const HomePage = ({ onViewChange }) => {
 
       {/* Quick Actions - Responsive Grid */}
       <div className="space-y-4">
-        <h2 className="text-xl md:text-2xl font-semibold gradient-text mb-6 arabic-text">
-          الإجراءات السريعة
+        <h2 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-4 arabic-text">
+          {t("quick_actions") || "الإجراءات السريعة"}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3">
           {quickActions.map((action, index) => {
             const Icon = action.icon;
             return (
@@ -294,56 +255,32 @@ const HomePage = ({ onViewChange }) => {
                 style={{ animationDelay: `${500 + index * 100}ms` }}
                 onClick={() => onViewChange(action.id)}
               >
-                <CardContent className="p-4 md:p-6 text-center">
+                <CardContent className="p-2 md:p-3 text-center flex flex-col items-center justify-center h-full">
                   <div
-                    className={`${action.color} w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3`}
+                    className={`${action.color} w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center mx-auto mb-1`}
                   >
-                    <Icon className="h-6 w-6 md:h-8 md:w-8 text-white" />
+                    <Icon className="h-4 w-4 md:h-5 md:w-5 text-white" />
                   </div>
-                  <h3 className="font-bold text-foreground arabic-text mb-2">
+                  <h3 className="font-bold text-xs md:text-sm text-foreground arabic-text">
                     {action.label}
                   </h3>
-                  <p className="text-xs md:text-sm text-muted-foreground arabic-text">
+                  <p className="text-xs text-muted-foreground arabic-text">
                     {action.description}
                   </p>
                 </CardContent>
               </Card>
-              // <Card
-              //   key={index}
-              //   className="glass-card hover:scale-105 transition-all duration-300 cursor-pointer group animate-fade-in-up"
-              //   style={{ animationDelay: `${500 + index * 100}ms` }}
-              //   onClick={action.action}
-              // >
-              //   <CardContent className="p-4 md:p-6 text-center">
-              //     <div
-              //       className={`inline-flex p-3 md:p-4 rounded-full ${
-              //         action.iconBg || action.color
-              //       } mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-300`}
-              //     >
-              //       <Icon className="h-6 w-6 md:h-8 md:w-8 text-white" />
-              //     </div>
-              //     <h3 className="text-sm md:text-lg font-semibold text-foreground mb-2 arabic-text">
-              //       {action.title}
-              //     </h3>
-              //     <p className="text-xs md:text-sm text-muted-foreground arabic-text">
-              //       {action.description}
-              //     </p>
-              //     <ArrowUpRight className="h-4 w-4 text-primary mt-3 mx-auto group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-              //   </CardContent>
-              // </Card>
             );
           })}
         </div>
       </div>
 
-      {/* Recent Activities and Platform Features */}
       {/* Recent Activity - Enhanced for mobile */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Recent Shipments */}
         <Card className="glass-card animate-fade-in-up animation-delay-900">
-          <CardHeader className="pb-3">
+          <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-lg md:text-xl arabic-text">
+              <CardTitle className="text-sm md:text-base arabic-text">
                 الشحنات الأخيرة
               </CardTitle>
               <Button
@@ -351,34 +288,34 @@ const HomePage = ({ onViewChange }) => {
                 size="sm"
                 className="text-primary hover:bg-primary/10"
               >
-                <Eye className="h-4 w-4 ml-2" />
-                <span className="arabic-text">عرض الكل</span>
+                <Eye className="h-3 w-3 ml-1" />
+                <span className="arabic-text text-xs">عرض الكل</span>
               </Button>
             </div>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="space-y-2">
             {recentShipments.map((shipment) => (
               <div
                 key={shipment.id}
-                className="flex items-center justify-between p-3 rounded-lg bg-background/50 hover:bg-background/80 transition-colors"
+                className="flex items-center justify-between p-2 rounded-md bg-background/50 hover:bg-background/80 transition-colors"
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
                   <div
-                    className={`w-3 h-3 rounded-full ${getStatusColor(
+                    className={`w-2 h-2 rounded-full ${getStatusColor(
                       shipment.status
                     )}`}
                   />
                   <div>
-                    <p className="font-medium text-sm md:text-base arabic-text">
+                    <p className="font-medium text-xs md:text-sm arabic-text">
                       {shipment.customer}
                     </p>
-                    <p className="text-xs md:text-sm text-muted-foreground">
+                    <p className="text-xs text-muted-foreground">
                       #{shipment.id}
                     </p>
                   </div>
                 </div>
                 <div className="text-left">
-                  <p className="font-bold text-sm md:text-base">
+                  <p className="font-bold text-xs md:text-sm">
                     {shipment.amount} ر.س
                   </p>
                   <p className="text-xs text-muted-foreground">
@@ -392,45 +329,45 @@ const HomePage = ({ onViewChange }) => {
 
         {/* Performance Chart */}
         <Card className="glass-card animate-fade-in-up animation-delay-1000">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-lg md:text-xl arabic-text">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm md:text-base arabic-text">
               أداء المنصة
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-3">
+          <CardContent className="space-y-3">
+            <div className="space-y-2">
               <div>
-                <div className="flex justify-between text-sm mb-2">
+                <div className="flex justify-between text-xs mb-1">
                   <span className="arabic-text">معدل التسليم الناجح</span>
                   <span>94%</span>
                 </div>
-                <Progress value={94} className="h-2" />
+                <Progress value={94} className="h-1.5" />
               </div>
               <div>
-                <div className="flex justify-between text-sm mb-2">
+                <div className="flex justify-between text-xs mb-1">
                   <span className="arabic-text">رضا العملاء</span>
                   <span>87%</span>
                 </div>
-                <Progress value={87} className="h-2" />
+                <Progress value={87} className="h-1.5" />
               </div>
               <div>
-                <div className="flex justify-between text-sm mb-2">
+                <div className="flex justify-between text-xs mb-1">
                   <span className="arabic-text">كفاءة السائقين</span>
                   <span>91%</span>
                 </div>
-                <Progress value={91} className="h-2" />
+                <Progress value={91} className="h-1.5" />
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 mt-4">
-              <div className="text-center p-3 bg-background/50 rounded-lg">
-                <BarChart3 className="h-6 w-6 text-primary mx-auto mb-2" />
+            <div className="grid grid-cols-2 gap-2 mt-2">
+              <div className="text-center p-2 bg-background/50 rounded-md">
+                <BarChart3 className="h-4 w-4 text-primary mx-auto mb-1" />
                 <p className="text-xs text-muted-foreground arabic-text">
                   تقارير مفصلة
                 </p>
               </div>
-              <div className="text-center p-3 bg-background/50 rounded-lg">
-                <PieChart className="h-6 w-6 text-primary mx-auto mb-2" />
+              <div className="text-center p-2 bg-background/50 rounded-md">
+                <PieChart className="h-4 w-4 text-primary mx-auto mb-1" />
                 <p className="text-xs text-muted-foreground arabic-text">
                   تحليلات متقدمة
                 </p>
@@ -439,92 +376,8 @@ const HomePage = ({ onViewChange }) => {
           </CardContent>
         </Card>
       </div>
-      {/* Performance Metrics - Enhanced */}
-      {/* <Card className="glass-card animate-fade-in-up">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-xl md:text-2xl gradient-text arabic-text text-center">
-            <TrendingUp className="h-5 w-5 text-primary" />
-            مؤشرات الأداء
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-            <div className="text-center space-y-2">
-              <div className="text-2xl md:text-3xl font-bold gradient-text">
-                99.8%
-              </div>
-              <div className="text-xs md:text-sm text-muted-foreground arabic-text">
-                معدل التسليم الناجح
-              </div>
-              <div className="bg-green-500/20 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto">
-                <CheckCircle className="h-6 w-6 md:h-8 md:w-8 text-green-500" />
-              </div>
-            </div>
-            <div className="text-center space-y-2">
-              <div className="text-2xl md:text-3xl font-bold gradient-text">
-                2.4 ساعة
-              </div>
-              <div className="text-xs md:text-sm text-muted-foreground arabic-text">
-                متوسط وقت التسليم
-              </div>
-              <div className="bg-blue-500/20 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto">
-                <Clock className="h-6 w-6 md:h-8 md:w-8 text-blue-500" />
-              </div>
-            </div>
-            <div className="text-center space-y-2">
-              <div className="text-2xl md:text-3xl font-bold gradient-text">
-                4.9/5
-              </div>
-              <div className="text-xs md:text-sm text-muted-foreground arabic-text">
-                تقييم العملاء
-              </div>
-              <div className="bg-yellow-500/20 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto">
-                <Star className="h-6 w-6 md:h-8 md:w-8 text-yellow-500" />
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card> */}
 
-      <Card className="glass-card animate-fade-in-up animation-delay-1100">
-        <CardHeader>
-          <CardTitle className="text-xl md:text-2xl gradient-text arabic-text text-center">
-            مميزات المنصة
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-            <div className="text-center space-y-3">
-              <div className="bg-blue-500/20 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto">
-                <Shield className="h-6 w-6 md:h-8 md:w-8 text-blue-500" />
-              </div>
-              <h3 className="font-bold arabic-text">أمان عالي</h3>
-              <p className="text-xs md:text-sm text-muted-foreground arabic-text">
-                حماية متقدمة للبيانات والمعاملات
-              </p>
-            </div>
-            <div className="text-center space-y-3">
-              <div className="bg-green-500/20 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto">
-                <Zap className="h-6 w-6 md:h-8 md:w-8 text-green-500" />
-              </div>
-              <h3 className="font-bold arabic-text">سرعة فائقة</h3>
-              <p className="text-xs md:text-sm text-muted-foreground arabic-text">
-                معالجة سريعة للطلبات والشحنات
-              </p>
-            </div>
-            <div className="text-center space-y-3">
-              <div className="bg-purple-500/20 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto">
-                <Globe className="h-6 w-6 md:h-8 md:w-8 text-purple-500" />
-              </div>
-              <h3 className="font-bold arabic-text">تغطية شاملة</h3>
-              <p className="text-xs md:text-sm text-muted-foreground arabic-text">
-                خدمة في جميع أنحاء المملكة
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
+      <Footer />
     </div>
   );
 };
